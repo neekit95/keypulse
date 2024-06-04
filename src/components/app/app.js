@@ -1,12 +1,12 @@
 import style from './app.module.scss';
 import Header from "../header/header";
-import {RiSpeedUpLine} from "react-icons/ri";
+import {useState} from "react";
+import Options from "../options/options";
+import {Game} from "../game/game";
 
 const App = () => {
-	
-	const arr = () => {
-	
-	}
+	const [speed, setSpeed] = useState(0);
+	const [accuracy, setAccuracy] = useState(100);
 	return (
 		<div className={style.container}>
 			
@@ -14,21 +14,10 @@ const App = () => {
 			
 			<div className="wrapper">
 				<div className={style.main}>
-					<div className={style.theGame}>
-						game
-					</div>
+					<Game/>
 					
-					<div className={style.options}>
-						<div className={style.option}>
-							<RiSpeedUpLine />
-							<p className={style.p}>Speed</p>
-						</div>
-						
-						<div className={style.option}>
-							<RiSpeedUpLine/>
-							Accuracy
-						</div>
-					</div>
+					<Options speed={speed} accuracy={accuracy}/>
+				
 				</div>
 			</div>
 		</div>
