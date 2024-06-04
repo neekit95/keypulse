@@ -25,6 +25,7 @@ const App = () => {
 						</div>
 						
 						<div className={style.option}>
+							<RiSpeedUpLine/>
 							Accuracy
 						</div>
 					</div>
