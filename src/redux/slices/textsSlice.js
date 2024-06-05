@@ -9,6 +9,7 @@ const texts = [
 const initialState = {
 	value: texts[0],
 	currentIndex : 0,
+	currentSybols: texts[0].length,
 }
 
 const textsSlice = createSlice({
@@ -18,6 +19,7 @@ const textsSlice = createSlice({
 		nextText: (state) => {
 			state.currentIndex = (state.currentIndex + 1) % texts.length;
 			state.value = texts[state.currentIndex];
+			state.currentSybols = texts[state.currentIndex].length
 		},
 	},
 });
