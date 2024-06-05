@@ -6,11 +6,11 @@ import Game from "../game/game";
 import AdminPanel from "../admin-panel/admin-panel";
 
 const App = () => {
-	const [speed, setSpeed] = useState(0);
-	const [accuracy, setAccuracy] = useState(100);
-	const [isGameStart, setIsGameStart] = useState(false);
-	const [isGameEnd, setIsGameEnd] = useState(false);
-	
+	// const [speed, setSpeed] = useState(0);
+	// const [accuracy, setAccuracy] = useState(100);
+	// const [isGameStart, setIsGameStart] = useState(false);
+	// const [isGameEnd, setIsGameEnd] = useState(false);
+	//
 	return (
 		<div className={style.container}>
 			
@@ -19,7 +19,7 @@ const App = () => {
 			<div className="wrapper">
 				<div className={style.main}>
 					<Game/>
-					<Options speed={speed} accuracy={accuracy}/>
+					<Options/>
 					<AdminPanel />
 				</div>
 			</div>

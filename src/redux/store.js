@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import textsReducer from "./slices/textsSlice";
 
 export const store = configureStore({
 	reducer: {
-		// добавьте ваши редьюсеры здесь
+		texts: textsReducer,
 	},
 });
+
+export default store;

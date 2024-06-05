@@ -2,10 +2,12 @@ import style from "./options.module.scss";
 import {RiSpeedUpLine} from "react-icons/ri";
 import {LuCircleDot} from "react-icons/lu";
 import {MdOutlineRestartAlt} from "react-icons/md";
-
-
+import {useSelector, useDispatch} from "react-redux";
+import {nextText} from "../../redux/slices/textsSlice";
 
 function Options(props) {
+	const dispatch = useDispatch();
+	
 	return <div className={style.options}>
 		
 		<div className={style.option}>
@@ -34,7 +36,9 @@ function Options(props) {
 		</div>
 		
 		<div className={style.restart}>
-			<button>
+			<button
+			 onClick={() => dispatch(nextText())}
+			>
 				<MdOutlineRestartAlt className={style.restartIcon}/>
 				<p>Заново</p>
 			</button>
