@@ -2,10 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
   width:100%;
+  margin-right: 10px;
   //height: 100%;
-  //-webkit-border-radius: 20px;
-  //-moz-border-radius: 20px;
-  //border-radius: 20px;
+  //background-color: teal;
+}
+
+.text {
+  //background-color: red;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  padding: 10px 35px 10px 15px;
+  font-size: 20px;
+  letter-spacing: 1.2px;
+  line-height: 1.5em;
 }

@@ -1,22 +1,23 @@
 .container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #748374;
+  //align-items: flex-start;
+  align-items: center;
+  //background-color: #748374;
+  background-color: #abb7bc;
   width: 100%;
-  height: 100vh;
-  border: 1px solid yellow;
+  height: calc(100vh - 60px);
   margin-top: 60px;
-  padding-top: 10%;
+  //padding-top: 5vw;
 }
 
 .main {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
   width: 90vw;
   height: 100%;
-  min-height: 500px;
+  min-height: 400px;
   border-radius: 15px;
   background-color: white;
   padding: 15px;

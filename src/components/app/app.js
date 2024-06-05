@@ -2,7 +2,7 @@ import style from './app.module.scss';
 import Header from "../header/header";
 import {useState} from "react";
 import Options from "../options/options";
-import {Game} from "../game/game";
+import Game from "../game/game";
 
 const App = () => {
 	const [speed, setSpeed] = useState(0);
