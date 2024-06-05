@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  min-width: 200px;
+  min-height: 500px;
+  background-color: #0a5b5b;
+  color:white;
+  gap: 10px;
+  border-radius: 10px;
+  padding:10px;
+  //opacity: 80%;
+}

@@ -12,7 +12,7 @@ function Options(props) {
 			<div className={style.sign}>
 				<RiSpeedUpLine/>
 				<p className={style.p}>
-					Speed
+					Скорость
 				</p>
 			</div>
 			<div className={style.defenition}>
@@ -24,7 +24,7 @@ function Options(props) {
 			
 			<div className={style.sign}>
 				<LuCircleDot/>
-				<p className={style.p}>Accuracy</p>
+				<p className={style.p}>Точность</p>
 			</div>
 			
 			<div className={style.defenition}>
@@ -36,7 +36,7 @@ function Options(props) {
 		<div className={style.restart}>
 			<button>
 				<MdOutlineRestartAlt className={style.restartIcon}/>
-				<p>Restart</p>
+				<p>Заново</p>
 			</button>
 		</div>
 	</div>;
