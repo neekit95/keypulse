@@ -1,27 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let intervalId = null; // Глобальная переменная для хранения идентификатора интервала
+
 const initialState = {
 	value: 0,
-	intervalId: null,
+	isTimerStarted: false,
 };
 
 const timerSlice = createSlice({
 	name: "timer",
 	initialState,
 	reducers: {
-		startTimer: (state, action) => {
-			if (!state.intervalId) {
-				const intervalId = setInterval(() => {
-					action.payload.dispatch(updateTimer());
-				}, 1000);
-				state.intervalId = intervalId;
-			}
+		startTimer: (state) => {
+			state.isTimerStarted = true;
 		},
 		stopTimer: (state) => {
-			if (state.intervalId) {
-				clearInterval(state.intervalId);
-				state.intervalId = null;
-			}
+			state.isTimerStarted = false;
 		},
 		resetTimer: (state) => {
 			state.value = 0;
@@ -33,4 +27,24 @@ const timerSlice = createSlice({
 });
 
 export const { startTimer, stopTimer, resetTimer, updateTimer } = timerSlice.actions;
+
+export const startTimerThunk = () => (dispatch, getState) => {
+	const { isTimerStarted } = getState().timer;
+	if (!isTimerStarted) {
+		dispatch(startTimer());
+		intervalId = setInterval(() => {
+			dispatch(updateTimer());
+		}, 1000);
+	}
+};
+
+export const stopTimerThunk = () => (dispatch, getState) => {
+	const { isTimerStarted } = getState().timer;
+	if (isTimerStarted) {
+		clearInterval(intervalId);
+		intervalId = null;
+		dispatch(stopTimer());
+	}
+};
+
 export default timerSlice.reducer;
