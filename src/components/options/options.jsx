@@ -4,7 +4,7 @@ import { LuCircleDot } from "react-icons/lu";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { nextText } from "../../redux/slices/textsSlice";
-import { startTimerThunk, stopTimerThunk, resetTimer } from "../../redux/slices/timerSlice";
+import { startTimerThunk, resetTimer } from "../../redux/slices/timerSlice";
 
 function Options(props) {
 	const dispatch = useDispatch();
@@ -14,9 +14,13 @@ function Options(props) {
 			<div className={style.option}>
 				<div className={style.sign}>
 					<RiSpeedUpLine />
-					<p className={style.p}>Скорость</p>
+					<p>
+						Скорость
+					</p>
 				</div>
-				<div className={style.defenition}>{props.speed} Зн/м</div>
+				<div className={style.defenition}>
+					{props.speed} Зн/м
+				</div>
 			</div>
 			
 			<div className={style.option}>
@@ -24,7 +28,11 @@ function Options(props) {
 					<LuCircleDot />
 					<p className={style.p}>Точность</p>
 				</div>
-				<div className={style.defenition}>{props.accuracy}%</div>
+				
+				<div className={style.defenition}>
+					{props.accuracy}%
+				</div>
+			
 			</div>
 			
 			<div className={style.restart}>

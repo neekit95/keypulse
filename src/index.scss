@@ -14,3 +14,12 @@
   max-width: 1000px;
   /*background-color: red;*/
 }
+
+button {
+  opacity: 90%;
+
+ &:hover {
+   opacity: 100%;
+   cursor: pointer;
+ }
+}

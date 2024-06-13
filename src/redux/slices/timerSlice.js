@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let intervalId = null; // Глобальная переменная для хранения идентификатора интервала
+let intervalId = null;
 
 const initialState = {
 	value: 0,

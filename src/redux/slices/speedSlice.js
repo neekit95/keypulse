@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { nextText} from "./textsSlice";
+
 
 const initialState = {
 	value: 0,
@@ -8,6 +8,12 @@ const initialState = {
 const speedSlice = createSlice({
 	name: 'speed',
 	initialState,
-	reducers: {}
-	
-})
+	reducers: {
+		updateSpeed: (state, action) => {
+			state.value = action.payload;
+		},
+	},
+});
+
+export const {updateSpeed} = speedSlice.actions;
+export default speedSlice.reducer;
