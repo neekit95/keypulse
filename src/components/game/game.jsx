@@ -1,56 +1,65 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateSpeed } from '../../redux/slices/speedSlice';
+import { updateInputText, addError, correctError, endGame, incrementCorrectSymbols, startGame } from '../../redux/slices/textsSlice';
+import { startTimerThunk, stopTimerThunk } from '../../redux/slices/timerSlice';
 import style from './game.module.scss';
-import { useSelector, useDispatch } from "react-redux";
-import { updateInputText, addError, correctError } from "../../redux/slices/textsSlice";
 
 const Game = () => {
 	const text = useSelector((state) => state.texts.value);
-	const inputText = useSelector((state) => state.texts.inputText);
-	const currentError = useSelector((state) => state.texts.currentError);
+	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted } = useSelector((state) => state.texts);
+	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
 	
-	const handleKeyPress = (e) => {
-		if (currentError === null) {
-			if (text[inputText.length] === e.key) {
-				dispatch(updateInputText(inputText + e.key));
-			} else {
-				dispatch(addError(inputText.length));
-			}
-		} else if (text[currentError] === e.key) {
-			dispatch(correctError());
-			dispatch(updateInputText(inputText.slice(0, currentError) + e.key));
-		}
-	};
-	
 	useEffect(() => {
-		window.addEventListener("keypress", handleKeyPress);
-		return () => {
-			window.removeEventListener("keypress", handleKeyPress);
-		};
-	}, [inputText, currentError]);
+		if (correctSymbols === text.length) {
+			dispatch(stopTimerThunk());
+			dispatch(endGame());
+		} else if (timer > 0 && !isGameEnd) {
+			const speed = (correctSymbols / timer) * 60;
+			dispatch(updateSpeed(speed));
+		}
+	}, [correctSymbols, timer, isGameEnd, text.length, dispatch]);
 	
-	const renderText = () => {
-		return text.split('').map((char, index) => {
-			let color = 'black';
-			if (index < inputText.length) {
-				color = char === inputText[index] ? 'green' : 'red';
-			}
-			if (index === currentError) {
-				color = 'red';
-			}
-			return (
-				<span key={index} style={{ color: color }}>
-          {char}
-        </span>
-			);
-		});
+	const handleChange = (e) => {
+		const value = e.target.value;
+		if (!isGameStarted && !isGameEnd) {
+			dispatch(startGame());
+			dispatch(startTimerThunk());
+		}
+		
+		if (value[currentIndex] !== text[currentIndex]) {
+			dispatch(addError(currentIndex));
+			return;
+		}
+		
+		dispatch(correctError());
+		dispatch(incrementCorrectSymbols());
+		dispatch(updateInputText(value));
 	};
 	
 	return (
 		<div className={style.theGame}>
 			<p className={style.text}>
-				{renderText()}
+				{text.split('').map((char, index) => (
+					<span
+						key={index}
+						className={
+							index === currentIndex ? style.nextChar :
+								currentError === index ? style.error :
+									index < inputText.length ? style.correct : ''
+						}
+					>
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+				))}
 			</p>
+			<input
+				type="text"
+				value={inputText}
+				onChange={handleChange}
+				// disabled={isGameEnd}
+			/>
 		</div>
 	);
 };

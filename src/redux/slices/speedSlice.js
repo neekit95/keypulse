@@ -1,5 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	value: 0,
@@ -15,5 +14,5 @@ const speedSlice = createSlice({
 	},
 });
 
-export const {updateSpeed} = speedSlice.actions;
+export const { updateSpeed } = speedSlice.actions;
 export default speedSlice.reducer;

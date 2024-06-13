@@ -8,37 +8,52 @@ const texts = [
 
 const initialState = {
 	value: texts[0],
+	inputText: '',
+	currentError: null,
+	isGameEnd: false,
 	currentIndex: 0,
 	currentSymbols: texts[0].length,
-	inputText: "",
 	errorCount: 0,
-	currentError: null,
+	correctSymbols: 0,
+	isGameStarted: false, // Новое состояние
 };
 
 const textsSlice = createSlice({
 	name: 'texts',
 	initialState,
 	reducers: {
-		nextText: (state) => {
-			state.currentIndex = (state.currentIndex + 1) % texts.length;
-			state.value = texts[state.currentIndex];
-			state.currentSymbols = texts[state.currentIndex].length;
-			state.inputText = "";
-			state.errorCount = 0;
-			state.currentError = null;
-		},
 		updateInputText: (state, action) => {
 			state.inputText = action.payload;
 		},
 		addError: (state, action) => {
-			state.errorCount += 1;
 			state.currentError = action.payload;
+			state.errorCount += 1;
 		},
 		correctError: (state) => {
 			state.currentError = null;
 		},
+		endGame: (state) => {
+			state.isGameEnd = true;
+			state.isGameStarted = false; // Остановка игры при завершении
+		},
+		resetGame: (state) => {
+			state.inputText = '';
+			state.currentError = null;
+			state.isGameEnd = false;
+			state.errorCount = 0;
+			state.correctSymbols = 0;
+			state.currentIndex = 0;
+			state.isGameStarted = false; // Сброс состояния игры
+		},
+		incrementCorrectSymbols: (state) => {
+			state.correctSymbols += 1;
+			state.currentIndex += 1;
+		},
+		startGame: (state) => {
+			state.isGameStarted = true; // Начало игры
+		},
 	},
 });
 
-export const { nextText, updateInputText, addError, correctError } = textsSlice.actions;
+export const { updateInputText, addError, correctError, endGame, resetGame, incrementCorrectSymbols, startGame } = textsSlice.actions;
 export default textsSlice.reducer;

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import textsReducer from "./slices/textsSlice";
-import timerReducer from "./slices/timerSlice";
-import speedReducer from "./slices/speedSlice";
+import textsReducer from './slices/textsSlice';
+import timerReducer from './slices/timerSlice';
+import speedReducer from './slices/speedSlice';
 
-export const store = configureStore({
+const store = configureStore({
 	reducer: {
 		texts: textsReducer,
 		timer: timerReducer,
@@ -11,4 +11,4 @@ export const store = configureStore({
 	},
 });
 
-export default store;
+export default store; // Экспортируем store как default
