@@ -3,8 +3,9 @@ import { RiSpeedUpLine } from "react-icons/ri";
 import { LuCircleDot } from "react-icons/lu";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { useDispatch } from "react-redux";
-// import { nextText } from "../../redux/slices/textsSlice";
+import { nextText } from "../../redux/slices/textsSlice";
 import { startTimerThunk, resetTimer } from "../../redux/slices/timerSlice";
+
 
 function Options(props) {
 	const dispatch = useDispatch();
@@ -38,9 +39,9 @@ function Options(props) {
 			<div className={style.restart}>
 				<button
 					onClick={() => {
-						// dispatch(nextText());
+						dispatch(nextText());
 						dispatch(resetTimer());
-						dispatch(startTimerThunk());
+						// dispatch(startTimerThunk());
 					}}
 				>
 					<MdOutlineRestartAlt className={style.restartIcon} />

@@ -11,6 +11,8 @@ Modal.setAppElement('#root'); // Устанавливаем элемент дл�
 const Game = () => {
 	const text = useSelector((state) => state.texts.value);
 	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount } = useSelector((state) => state.texts);
+	// const currentSymbols = useSelector((state) => state.texts.correctSymbols);
+	
 	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,9 +79,13 @@ const Game = () => {
 				overlayClassName={style.overlay}
 			>
 				<h2>Результаты игры</h2>
-				<p>Количество ошибок: {errorCount}</p>
-				<p>Скорость: {Math.round((correctSymbols / (timer / 100)) * 6)} зн/мин</p>
-				<button onClick={handleCloseModal}>Закрыть</button>
+				<div className={style.results}>
+					<p>Количество ошибок:<span>{errorCount}</span></p>
+					<p>Точность (%):<span>{errorCount}</span></p>
+					<p>Скорость (зн/мин): <span>
+						{Math.round((correctSymbols / (timer / 100)) * 6)}
+					</span></p>
+				</div>
 				<button onClick={handleRestart}>Начать заново</button>
 			</Modal>
 		</div>

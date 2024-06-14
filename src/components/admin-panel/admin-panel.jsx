@@ -17,7 +17,7 @@ const AdminPanel = () => {
 	
 	return (
 		<div className={style.container}>
-			<p>Число знаков:
+			<p>Число набранных символов:
 				<span>{currentSymbols}</span>
 			</p>
 			<p>Таймер:

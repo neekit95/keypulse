@@ -17,16 +17,17 @@
 
 button {
   opacity: 90%;
-
  &:hover {
    opacity: 100%;
    cursor: pointer;
  }
 }
 
-/* index.scss */
 .ReactModal__Overlay {
   background-color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+
+
 }
 
 .ReactModal__Content {
@@ -35,10 +36,6 @@ button {
   left: 50%;
   right: auto;
   bottom: auto;
-  //margin-right: -50%;
-  //transform: translate(50%, 5%);
-
-  //background: #fff;
   padding: 20px;
   outline: none;
   width: 400px;
@@ -48,19 +45,34 @@ button {
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  //transform: translate(-50%, -50%);
-
-  //background-color:teal;
-  //color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  //background-color: teal;
   button {
     width: 200px ;
     height: 50px;
     font-size: 20px;
-    background-color: #5e7dde;
     border-radius: 5px;
-    color: white;
+    background-color: white;
+    color: #396aab;
   }
 }
+
+//.modal {
+//  position: absolute;
+//  top: 50%;
+//  left: 50%;
+//  right: auto;
+//  bottom: auto;
+//  margin-right: -50%;
+//  transform: translate(-50%, -50%);
+//  background: #fff;
+//  padding: 20px;
+//  border-radius: 4px;
+//  outline: none;
+//}
+//
+//.overlay {
+//  background-color: rgba(0, 0, 0, 0.75);
+//}

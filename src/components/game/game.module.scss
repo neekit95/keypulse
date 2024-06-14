@@ -47,10 +47,12 @@
   width: 100%;
 }
 
-.p {
-  background-color: #fff;
-  padding: 10px;
-}
+//.p {
+//  background-color: #fff;
+//  padding: 10px;
+//}
+
+
 
 .error {
   background-color: #de8981;
@@ -65,6 +67,7 @@
 }
 
 .modal {
+  background-color: #396aab;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -72,12 +75,46 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 20px;
-  border-radius: 4px;
+  //background: #fff;
+  padding: 50px;
+  border-radius: 10px;
   outline: none;
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  color: white;
+  .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    //background-color: #fffa;
+    gap: 10px;
+    p {
+      //text-decoration: underline;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      //line-height: 26px;
+      //letter-spacing: 1.3px;
+      width: 100%;
+      span {
+
+      }
+    }
+  }
 }
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.75);
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //backdrop-filter: sepia(1);
+  cursor: pointer;
 }

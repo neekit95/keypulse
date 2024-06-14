@@ -50,9 +50,31 @@ const textsSlice = createSlice({
 		},
 		startGame: (state) => {
 			state.isGameStarted = true;
+		},
+		nextText: (state) => {
+			state.currentIndex = (state.currentIndex + 1) % texts.length;
+			state.value = texts[state.currentIndex];
+			state.currentError = null;
+			state.inputText = '';
+			state.isGameEnd = false;
+			state.errorCount = 0;
+			state.correctSymbols = 0;
+			state.isGameStarted = false;
+			state.currentSymbols = texts[state.currentIndex].length;
+			
+				// currentIndex: 0,
+				// value: texts[0],
+				// inputText: '',
+				// currentError: null,
+				// isGameEnd: false,
+				// currentSymbols: texts[0].length,
+				// errorCount: 0,
+				// correctSymbols: 0,
+				// isGameStarted: false
+			
 		}
 	},
 });
 
-export const { updateInputText, addError, correctError, endGame, resetGame, incrementCorrectSymbols, startGame } = textsSlice.actions;
+export const { updateInputText, addError, correctError, endGame, resetGame,nextText, incrementCorrectSymbols, startGame } = textsSlice.actions;
 export default textsSlice.reducer;
