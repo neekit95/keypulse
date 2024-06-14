@@ -23,3 +23,44 @@ button {
    cursor: pointer;
  }
 }
+
+/* index.scss */
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  //margin-right: -50%;
+  //transform: translate(50%, 5%);
+
+  //background: #fff;
+  padding: 20px;
+  outline: none;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  //transform: translate(-50%, -50%);
+
+  //background-color:teal;
+  //color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  button {
+    width: 200px ;
+    height: 50px;
+    font-size: 20px;
+    background-color: #5e7dde;
+    border-radius: 5px;
+    color: white;
+  }
+}

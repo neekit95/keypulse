@@ -11,11 +11,11 @@ const initialState = {
 	inputText: '',
 	currentError: null,
 	isGameEnd: false,
-	isGameStarted: false,
 	currentIndex: 0,
 	currentSymbols: texts[0].length,
 	errorCount: 0,
 	correctSymbols: 0,
+	isGameStarted: false
 };
 
 const textsSlice = createSlice({
@@ -24,7 +24,7 @@ const textsSlice = createSlice({
 	reducers: {
 		updateInputText: (state, action) => {
 			state.inputText = action.payload;
-			state.currentIndex = action.payload.length;
+			state.currentIndex += 1;
 		},
 		addError: (state, action) => {
 			state.currentError = action.payload;
@@ -40,9 +40,10 @@ const textsSlice = createSlice({
 			state.inputText = '';
 			state.currentError = null;
 			state.isGameEnd = false;
-			state.isGameStarted = false;
 			state.errorCount = 0;
 			state.correctSymbols = 0;
+			state.currentIndex = 0;
+			state.isGameStarted = false;
 		},
 		incrementCorrectSymbols: (state) => {
 			state.correctSymbols += 1;

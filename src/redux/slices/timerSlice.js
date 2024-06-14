@@ -34,7 +34,7 @@ export const startTimerThunk = () => (dispatch, getState) => {
 		dispatch(startTimer());
 		intervalId = setInterval(() => {
 			dispatch(updateTimer());
-		}, 1000);
+		}, 100);
 	}
 };
 
