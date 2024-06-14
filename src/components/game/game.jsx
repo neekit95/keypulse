@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateSpeed } from '../../redux/slices/speedSlice';
 import { updateInputText, addError, correctError, endGame, incrementCorrectSymbols, startGame } from '../../redux/slices/textsSlice';
@@ -10,6 +10,8 @@ const Game = () => {
 	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted } = useSelector((state) => state.texts);
 	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
+	const inputRef = useRef(null);
+	const [currentInput, setCurrentInput] = useState('');
 	
 	useEffect(() => {
 		if (correctSymbols === text.length) {
@@ -21,25 +23,36 @@ const Game = () => {
 		}
 	}, [correctSymbols, timer, isGameEnd, text.length, dispatch]);
 	
-	const handleChange = (e) => {
-		const value = e.target.value;
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, []);
+	
+	const handleKeyDown = (e) => {
+		if (e.key === 'Shift' || e.key === 'Control' || e.key === 'Alt') {
+			return;
+		}
+		const value = e.key;
+		setCurrentInput(value);
+		
 		if (!isGameStarted && !isGameEnd) {
 			dispatch(startGame());
 			dispatch(startTimerThunk());
 		}
 		
-		if (value[currentIndex] !== text[currentIndex]) {
+		if (value !== text[currentIndex]) {
 			dispatch(addError(currentIndex));
 			return;
 		}
 		
 		dispatch(correctError());
 		dispatch(incrementCorrectSymbols());
-		dispatch(updateInputText(value));
+		dispatch(updateInputText(inputText + value));
 	};
 	
 	return (
-		<div className={style.theGame}>
+		<div className={style.theGame} tabIndex="0" onKeyDown={handleKeyDown} ref={inputRef}>
 			<p className={style.text}>
 				{text.split('').map((char, index) => (
 					<span
@@ -50,16 +63,10 @@ const Game = () => {
 									index < inputText.length ? style.correct : ''
 						}
 					>
-            {char === ' ' ? '\u00A0' : char}
-          </span>
+                        {char === ' ' ? '\u00A0' : char}
+                    </span>
 				))}
 			</p>
-			<input
-				type="text"
-				value={inputText}
-				onChange={handleChange}
-				// disabled={isGameEnd}
-			/>
 		</div>
 	);
 };

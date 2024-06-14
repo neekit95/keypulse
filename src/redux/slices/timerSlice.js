@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 let intervalId = null;
 
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const timerSlice = createSlice({
-	name: 'timer',
+	name: "timer",
 	initialState,
 	reducers: {
 		startTimer: (state) => {
@@ -30,9 +30,7 @@ export const { startTimer, stopTimer, resetTimer, updateTimer } = timerSlice.act
 
 export const startTimerThunk = () => (dispatch, getState) => {
 	const { isTimerStarted } = getState().timer;
-	const { isGameStarted } = getState().texts;
-	
-	if (!isTimerStarted && isGameStarted) {
+	if (!isTimerStarted) {
 		dispatch(startTimer());
 		intervalId = setInterval(() => {
 			dispatch(updateTimer());

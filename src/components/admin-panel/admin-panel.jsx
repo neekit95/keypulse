@@ -1,46 +1,37 @@
 import React from 'react';
 import style from './admin-panel.module.scss';
-import {useDispatch, useSelector} from 'react-redux';
-import {stopTimerThunk} from '../../redux/slices/timerSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { resetGame } from "../../redux/slices/textsSlice";
 
 const AdminPanel = () => {
-	const currentSymbols = useSelector((state) => state.texts.currentSymbols);
+	const currentSymbols = useSelector((state) => state.texts.correctSymbols);
 	const timer = useSelector((state) => state.timer.value);
 	const speed = useSelector((state) => state.speed.value);
 	const errorCount = useSelector((state) => state.texts.errorCount);
-	const correctSymbols = useSelector((state) => state.texts.correctSymbols);
 	const dispatch = useDispatch();
+	
+	const handleReset = () => {
+		dispatch(resetGame());
+		window.location.reload(); // перезагрузка страницы для сброса состояния
+	};
 	
 	return (
 		<div className={style.container}>
-			<p> Число знаков:
-				<span>
-          {currentSymbols}
-        </span>
+			<p>Число знаков:
+				<span>{currentSymbols}</span>
 			</p>
-			<p> Таймер:
-				<button onClick={() => dispatch(stopTimerThunk())}>Остановить</button>
-				<span>
-          {timer}
-        </span>
+			<p>Таймер:
+				<button onClick={handleReset}>Заново</button>
+				<span>{timer}</span>
 			</p>
-			<p>
-				Скорость Зн/м:
-				<span>
-          {speed.toFixed(2)}
-        </span>
+			<p>Скорость Зн/м:
+				<span>{speed.toFixed(2)}</span>
 			</p>
-			<p>
-				Ошибки:
-				<span>
-          {errorCount}
-        </span>
+			<p>Ошибки:
+				<span>{errorCount}</span>
 			</p>
-			<p>
-				Правильные знаки:
-				<span>
-          {correctSymbols}
-        </span>
+			<p>Язык ввода:
+				<span>{navigator.language}</span>
 			</p>
 		</div>
 	);
