@@ -4,8 +4,7 @@ import { LuCircleDot } from "react-icons/lu";
 import { MdOutlineRestartAlt } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { nextText } from "../../redux/slices/textsSlice";
-import { startTimerThunk, resetTimer } from "../../redux/slices/timerSlice";
-
+import { resetTimer, startTimerThunk } from "../../redux/slices/timerSlice";
 
 function Options(props) {
 	const dispatch = useDispatch();
@@ -41,7 +40,7 @@ function Options(props) {
 					onClick={() => {
 						dispatch(nextText());
 						dispatch(resetTimer());
-						// dispatch(startTimerThunk());
+						dispatch(startTimerThunk());
 					}}
 				>
 					<MdOutlineRestartAlt className={style.restartIcon} />

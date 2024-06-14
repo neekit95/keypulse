@@ -2,7 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import { updateSpeed } from '../../redux/slices/speedSlice';
-import { updateInputText, addError, correctError, endGame, incrementCorrectSymbols, startGame, resetGame } from '../../redux/slices/textsSlice';
+import {
+	updateInputText,
+	addError,
+	correctError,
+	endGame,
+	incrementCorrectSymbols,
+	startGame,
+	resetGame,
+	nextText
+} from '../../redux/slices/textsSlice';
 import { startTimerThunk, stopTimerThunk, resetTimer } from '../../redux/slices/timerSlice';
 import style from './game.module.scss';
 
@@ -11,8 +20,6 @@ Modal.setAppElement('#root'); // Устанавливаем элемент дл�
 const Game = () => {
 	const text = useSelector((state) => state.texts.value);
 	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount } = useSelector((state) => state.texts);
-	// const currentSymbols = useSelector((state) => state.texts.correctSymbols);
-	
 	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +57,7 @@ const Game = () => {
 	};
 	
 	const handleRestart = () => {
-		dispatch(resetGame());
+		dispatch(nextText()); // Переход к следующему тексту при перезапуске
 		dispatch(resetTimer());
 		setIsModalOpen(false);
 	};
@@ -81,10 +88,10 @@ const Game = () => {
 				<h2>Результаты игры</h2>
 				<div className={style.results}>
 					<p>Количество ошибок:<span>{errorCount}</span></p>
-					<p>Точность (%):<span>{errorCount}</span></p>
+					<p>Точность (%):<span>{((correctSymbols / (correctSymbols + errorCount)) * 100).toFixed(2)}</span></p>
 					<p>Скорость (зн/мин): <span>
-						{Math.round((correctSymbols / (timer / 100)) * 6)}
-					</span></p>
+                        {Math.round((correctSymbols / (timer / 100)) * 6)}
+                    </span></p>
 				</div>
 				<button onClick={handleRestart}>Начать заново</button>
 			</Modal>

@@ -5,6 +5,8 @@ import { resetGame } from "../../redux/slices/textsSlice";
 
 const AdminPanel = () => {
 	const currentSymbols = useSelector((state) => state.texts.correctSymbols);
+	const totalSymbols = useSelector((state) => state.texts.totalSymbols);
+	
 	const timer = useSelector((state) => state.timer.value);
 	const speed = useSelector((state) => state.speed.value);
 	const errorCount = useSelector((state) => state.texts.errorCount);
@@ -19,6 +21,9 @@ const AdminPanel = () => {
 		<div className={style.container}>
 			<p>Число набранных символов:
 				<span>{currentSymbols}</span>
+			</p>
+			<p>Общее число символов:
+				<span>{totalSymbols}</span>
 			</p>
 			<p>Таймер:
 				<button onClick={handleReset}>Заново</button>
