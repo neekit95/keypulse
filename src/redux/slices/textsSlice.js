@@ -16,7 +16,8 @@ const initialState = {
 	errorCount: 0,
 	correctSymbols: 0,
 	isGameStarted: false,
-	currentTextIndex: 0 // Индекс текущего текста
+	currentTextIndex: 0, // Индекс текущего текста
+	lastErrorIndex: null
 };
 
 const textsSlice = createSlice({
@@ -29,9 +30,17 @@ const textsSlice = createSlice({
 			state.currentIndex += 1;
 		},
 		addError: (state, action) => {
-			if (state.isGameEnd) return; // Предотвращение учета ошибок после завершения игры
-			state.currentError = action.payload;
-			state.errorCount += 1;
+			if (state.isGameEnd) return;
+			
+			// Получаем текущий индекс ошибки
+			const errorIndex = action.payload;
+			
+			// Проверяем, была ли уже учтена ошибка на этом индексе
+			if (state.lastErrorIndex !== errorIndex) {
+				state.currentError = errorIndex;
+				state.errorCount += 1;
+				state.lastErrorIndex = errorIndex; // Обновляем последнюю ошибку
+			}
 		},
 		correctError: (state) => {
 			state.currentError = null;
@@ -49,6 +58,7 @@ const textsSlice = createSlice({
 			// state.currentSymbols = texts[state.currentTextIndex].length;
 			state.value = texts[state.currentTextIndex]; // Используем текущий индекс для сброса текста
 			state.totalSymbols = texts[state.currentTextIndex].length; // Обновление общего количества символов для текущего текста
+			state.lastErrorIndex = null;
 		},
 		incrementCorrectSymbols: (state) => {
 			if (state.isGameEnd) return; // Предотвращение учета ошибок после завершения игры
@@ -69,6 +79,7 @@ const textsSlice = createSlice({
 			state.errorCount = 0;
 			state.correctSymbols = 0;
 			state.isGameStarted = false;
+			state.lastErrorIndex = null;
 		}
 	},
 });

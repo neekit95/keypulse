@@ -14,6 +14,7 @@ import {
 } from '../../redux/slices/textsSlice';
 import { startTimerThunk, stopTimerThunk, resetTimer } from '../../redux/slices/timerSlice';
 import style from './game.module.scss';
+import {updateAccuracy} from "../../redux/slices/accuracySlice";
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
@@ -23,6 +24,8 @@ const Game = () => {
 	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const speed = Math.round((correctSymbols / (timer / 100)) * 6); // Преобразование таймера в секунды и округление до целого числа
+	const accuracy = Math.round(correctSymbols / (correctSymbols + errorCount) * 100) ;
 	
 	useEffect(() => {
 		if (correctSymbols === text.length) {
@@ -30,8 +33,8 @@ const Game = () => {
 			dispatch(endGame());
 			setIsModalOpen(true);
 		} else if (timer > 0 && !isGameEnd) {
-			const speed = Math.round((correctSymbols / (timer / 100)) * 6); // Преобразование таймера в секунды и округление до целого числа
 			dispatch(updateSpeed(speed));
+			dispatch(updateAccuracy(accuracy))
 		}
 	}, [correctSymbols, timer, isGameEnd, text.length, dispatch]);
 	
@@ -50,6 +53,7 @@ const Game = () => {
 		dispatch(correctError());
 		dispatch(incrementCorrectSymbols());
 		dispatch(updateInputText(inputText + char));
+		
 	};
 	
 	const handleCloseModal = () => {
@@ -88,9 +92,9 @@ const Game = () => {
 				<h2>Результаты игры</h2>
 				<div className={style.results}>
 					<p>Количество ошибок:<span>{errorCount}</span></p>
-					<p>Точность (%):<span>{((correctSymbols / (correctSymbols + errorCount)) * 100).toFixed(2)}</span></p>
+					<p>Точность (%):<span>{accuracy}</span></p>
 					<p>Скорость (зн/мин): <span>
-                        {Math.round((correctSymbols / (timer / 100)) * 6)}
+                        {speed}
                     </span></p>
 				</div>
 				<button onClick={handleRestart}>Начать заново</button>
