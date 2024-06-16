@@ -1,19 +1,31 @@
-import style from "./options.module.scss";
-import { RiSpeedUpLine } from "react-icons/ri";
-import { LuCircleDot } from "react-icons/lu";
-import { MdOutlineRestartAlt } from "react-icons/md";
-import {useDispatch, useSelector} from "react-redux";
-import { nextText } from "../../redux/slices/textsSlice";
-import {resetTimer, startTimerThunk, stopTimerThunk} from "../../redux/slices/timerSlice";
-import React from "react";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateSpeed } from '../../redux/slices/speedSlice';
+import { nextText } from '../../redux/slices/textsSlice';
+import { resetTimer, startTimerThunk, stopTimerThunk } from '../../redux/slices/timerSlice';
+import { RiSpeedUpLine } from 'react-icons/ri';
+import { LuCircleDot } from 'react-icons/lu';
+import { MdOutlineRestartAlt } from 'react-icons/md';
+import style from './options.module.scss';
 
-function Options(props) {
+const Options = () => {
 	const dispatch = useDispatch();
 	const speed = useSelector((state) => state.speed.value);
-	const { correctSymbols, errorCount, isGameStarted } = useSelector((state) => state.texts);
-	// const accuracy = Math.round((correctSymbols / (correctSymbols + errorCount)) * 100)
-	const accuracy = useSelector((state) => state.accuracy.value)
-	return (
+	const { isGameStarted, correctSymbols, errorCount } = useSelector((state) => state.texts);
+	const timer = useSelector((state) => state.timer.value); // Обновлено получение таймера из Redux state
+	const accuracy = useSelector((state) => state.accuracy.value);
+	
+	useEffect(() => {
+		if (isGameStarted && timer > 0) {
+			const intervalId = setInterval(() => {
+				dispatch(updateSpeed(Math.round(correctSymbols / (timer / 10) * 60)));
+			}, 1000); // Обновление скорости для пользователя каждую секунду
+			
+			return () => clearInterval(intervalId);
+		}
+	}, [isGameStarted, correctSymbols, timer, dispatch]);
+	
+		return (
 		<div className={style.options}>
 			<div className={style.option}>
 				<div className={style.sign}>
@@ -23,23 +35,23 @@ function Options(props) {
 					</p>
 				</div>
 				<div className={style.defenition}>
-					{ isGameStarted ? speed : 0} Зн/м
+					{isGameStarted ? speed : 0} Зн/м
 				</div>
 			</div>
-			
+
 			<div className={style.option}>
 				<div className={style.sign}>
 					<LuCircleDot />
 					<p className={style.p}>Точность</p>
 				</div>
-				
+
 				<div className={style.defenition}>
-					{isGameStarted ?  accuracy: '100' }
-					 %
+					{isGameStarted ?  accuracy : '100.0' }
+					%
 				</div>
-			
+
 			</div>
-			
+
 			<div className={style.restart}>
 				<button
 					onClick={() => {
@@ -54,6 +66,6 @@ function Options(props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Options;

@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   margin-right: 10px;
+  position: relative;
 
   p {
     width: 100%;
@@ -119,4 +120,56 @@
   align-items: center;
   //backdrop-filter: sepia(1);
   cursor: pointer;
+}
+
+.language {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  //top: -150px;
+  color: white;
+  border: 5px solid red;
+  border-radius: 10px;
+  z-index: 20;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: top 1s ease;
+  -moz-transition: top 1s ease;
+  -ms-transition: top 1s ease;
+  -o-transition: top 1s ease;
+  transition: top 1s ease;
+  top: -150px;
+
+}
+
+.languageNone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 0;
+  color: white;
+  border: 5px solid red;
+  border-radius: 10px;
+  z-index: 20;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: top 1s;
+  -moz-transition: top 1s;
+  -ms-transition: top 1s;
+  -o-transition: top 1s;
+  transition: top 1s;
 }
