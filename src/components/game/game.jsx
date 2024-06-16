@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'react-modal';
-import {calculateSpeed, updateSpeed} from '../../redux/slices/speedSlice';
+import { calculateSpeed, updateSpeed } from '../../redux/slices/speedSlice';
 import {
 	addError,
 	correctError,
@@ -11,15 +11,15 @@ import {
 	startGame,
 	updateInputText,
 } from '../../redux/slices/textsSlice';
-import {resetTimer, startTimerThunk, stopTimerThunk} from '../../redux/slices/timerSlice';
+import { resetTimer, startTimerThunk, stopTimerThunk } from '../../redux/slices/timerSlice';
 import style from './game.module.scss';
-import {updateAccuracy} from '../../redux/slices/accuracySlice';
+import { updateAccuracy } from '../../redux/slices/accuracySlice';
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
 const Game = () => {
 	const text = useSelector((state) => state.texts.value);
-	const {inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount} = useSelector(
+	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount } = useSelector(
 		(state) => state.texts
 	);
 	const timer = useSelector((state) => state.timer.value);
@@ -28,7 +28,9 @@ const Game = () => {
 	const gameRef = useRef(null);
 	const modalButtonRef = useRef(null);
 	const accuracy = ((correctSymbols / (correctSymbols + errorCount)) * 100).toFixed(1);
-	const [isCorrectLanguage, setIsCorrectLanguage] = useState(false);
+	
+	const [currentLanguage, setCurrentLanguage] = useState('');
+	const [showLanguageWarning, setShowLanguageWarning] = useState(false);
 	
 	useEffect(() => {
 		gameRef.current.focus(); // Фокусировка на игре при загрузке страницы и начале игры
@@ -48,7 +50,7 @@ const Game = () => {
 		if (correctSymbols === text.length) {
 			dispatch(stopTimerThunk());
 			dispatch(endGame());
-			dispatch(calculateSpeed({correctSymbols, timer}));
+			dispatch(calculateSpeed({ correctSymbols, timer }));
 			setIsModalOpen(true);
 		} else if (timer > 0 && !isGameEnd) {
 			dispatch(updateAccuracy(accuracy));
@@ -80,10 +82,10 @@ const Game = () => {
 		gameRef.current.focus(); // Фокусировка на игре после перезапуска
 	};
 	
-	const [currentLanguage, setCurrentLanguage] = useState('');
-	
 	useEffect(() => {
 		const handleKeyPress = (event) => {
+			if (!isGameStarted || isGameEnd) return; // Проверка, идет ли игра и не завершена ли она
+			
 			const char = event.key;
 			
 			// Проверяем, является ли символ знаком пунктуации или пробелом
@@ -95,6 +97,10 @@ const Game = () => {
 				setCurrentLanguage('Russian');
 			} else {
 				setCurrentLanguage('English');
+				setShowLanguageWarning(true);
+				setTimeout(() => {
+					setShowLanguageWarning(false);
+				}, 1500); // Уведомление будет показываться 1.5 секунды
 			}
 		};
 		
@@ -104,20 +110,13 @@ const Game = () => {
 			// Убираем слушатель при размонтировании компонента
 			document.removeEventListener('keypress', handleKeyPress);
 		};
-	}, []);
-	
+	}, [isGameStarted, isGameEnd]);
 	
 	return (
 		<div className={style.theGame} tabIndex="0" onKeyPress={handleKeyPress} ref={gameRef}>
-			
-			{
-				currentLanguage === 'English' ? (
-					<div className={
-						currentLanguage === 'English' ? style.language : style.languageNone}>
-						Переключите язык
-					</div>
-				) : null
-			}
+			<div className={`${style.language} ${showLanguageWarning ? style.show : ''}`}>
+				Переключите язык
+			</div>
 			<p className={style.text}>
 				{text.split('').map((char, index) => (
 					<span
@@ -132,8 +131,8 @@ const Game = () => {
 										: ''
 						}
 					>
-        {char === ' ' ? '\u00A0' : char}
-      </span>
+                        {char === ' ' ? '\u00A0' : char}
+                    </span>
 				))}
 			</p>
 			<Modal
@@ -164,4 +163,3 @@ const Game = () => {
 };
 
 export default Game;
-

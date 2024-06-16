@@ -4,8 +4,9 @@
   align-items: center;
   width: 100%;
   margin-right: 10px;
-  position: relative;
-
+  //position: relative;
+  outline: none;
+  z-index: 1; // Установим z-index для .theGame
   p {
     width: 100%;
     height: 100%;
@@ -25,7 +26,8 @@
 }
 
 .text {
-  border: 1px solid white;
+  z-index: 1; // Установим z-index для .text
+  //border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,13 +50,6 @@
   width: 100%;
 }
 
-//.p {
-//  background-color: #fff;
-//  padding: 10px;
-//}
-
-
-
 .error {
   background-color: #de8981;
 }
@@ -76,7 +71,6 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  //background: #fff;
   padding: 50px;
   border-radius: 10px;
   outline: none;
@@ -84,22 +78,19 @@
   justify-content: space-around;
   font-size: 20px;
   color: white;
+  z-index: 20; // Установим z-index для модального окна
   .results {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    //background-color: #fffa;
     gap: 10px;
     p {
-      //text-decoration: underline;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 20px;
-      //line-height: 26px;
-      //letter-spacing: 1.3px;
       width: 100%;
       span {
 
@@ -118,7 +109,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  //backdrop-filter: sepia(1);
   cursor: pointer;
 }
 
@@ -129,47 +119,21 @@
   width: 200px;
   height: 100px;
   position: absolute;
-  left: 50%;
-  right: 50%;
-  //top: -150px;
+  right: 0;
+  top: 80px;
+  transform: translateX(-50%);
+  //color: white;
+  background-color: #e34747;
+  font-size: 20px;
   color: white;
-  border: 5px solid red;
   border-radius: 10px;
-  z-index: 20;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  z-index: 10; // Устанавливаем z-index для language выше, чем у .theGame
   user-select: none;
-  -webkit-transition: top 1s ease;
-  -moz-transition: top 1s ease;
-  -ms-transition: top 1s ease;
-  -o-transition: top 1s ease;
-  transition: top 1s ease;
-  top: -150px;
-
+  transition: right 0.7s, opacity 0.5s;
+  opacity: 0; // Начальное значение прозрачности
 }
 
-.languageNone {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 100px;
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  top: 0;
-  color: white;
-  border: 5px solid red;
-  border-radius: 10px;
-  z-index: 20;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: top 1s;
-  -moz-transition: top 1s;
-  -ms-transition: top 1s;
-  -o-transition: top 1s;
-  transition: top 1s;
+.language.show {
+  right: 150px;
+  opacity: 1;
 }
