@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Modal from 'react-modal';
-import { calculateSpeed, updateSpeed } from '../../redux/slices/speedSlice';
+import {calculateSpeed, updateSpeed} from '../../redux/slices/speedSlice';
 import {
 	addError,
 	correctError,
@@ -11,31 +11,38 @@ import {
 	startGame,
 	updateInputText,
 } from '../../redux/slices/textsSlice';
-import { resetTimer, startTimerThunk, stopTimerThunk } from '../../redux/slices/timerSlice';
+import {resetTimer, startTimerThunk, stopTimerThunk} from '../../redux/slices/timerSlice';
 import style from './game.module.scss';
-import { updateAccuracy } from '../../redux/slices/accuracySlice';
+import {updateAccuracy} from '../../redux/slices/accuracySlice';
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
 const Game = () => {
 	const text = useSelector((state) => state.texts.value);
-	const { inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount } = useSelector(
-		(state) => state.texts
-	);
+	const {
+		inputText,
+		currentError,
+		currentIndex,
+		isGameEnd,
+		correctSymbols,
+		isGameStarted,
+		errorCount
+	} = useSelector((state) => state.texts);
 	const timer = useSelector((state) => state.timer.value);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const gameRef = useRef(null);
 	const modalButtonRef = useRef(null);
 	const accuracy = ((correctSymbols / (correctSymbols + errorCount)) * 100).toFixed(1);
-	
 	const [currentLanguage, setCurrentLanguage] = useState('');
 	const [showLanguageWarning, setShowLanguageWarning] = useState(false);
 	
+	// Фокусировка на игре при загрузке страницы и начале игры
 	useEffect(() => {
-		gameRef.current.focus(); // Фокусировка на игре при загрузке страницы и начале игры
+		gameRef.current.focus();
 	}, []);
 	
+	// Фокусировка на кнопке начать заново при окончании игры
 	useEffect(() => {
 		if (isModalOpen) {
 			setTimeout(() => {
@@ -46,17 +53,19 @@ const Game = () => {
 		}
 	}, [isModalOpen]);
 	
+	// При окончании игры конец таймера, подсчет скорости. При начале игры обновление точности.
 	useEffect(() => {
 		if (correctSymbols === text.length) {
 			dispatch(stopTimerThunk());
 			dispatch(endGame());
-			dispatch(calculateSpeed({ correctSymbols, timer }));
+			dispatch(calculateSpeed({correctSymbols, timer}));
 			setIsModalOpen(true);
 		} else if (timer > 0 && !isGameEnd) {
 			dispatch(updateAccuracy(accuracy));
 		}
 	}, [correctSymbols, timer, isGameEnd, text.length, dispatch, accuracy]);
 	
+	// Начало игры, старт таймера при вводе символа. Обработка неверно введенного символа.
 	const handleKeyPress = (e) => {
 		const char = e.key;
 		if (!isGameStarted && !isGameEnd) {
@@ -75,6 +84,7 @@ const Game = () => {
 		dispatch(updateSpeed(Math.round(correctSymbols / (timer / 10) * 60))); // Обновление скорости при каждом верно введенном символе
 	};
 	
+	// Рестарт игры, переход к следующему тексту, обнуление таймера, фокус на игре.
 	const handleRestart = () => {
 		dispatch(nextText()); // Переход к следующему тексту при перезапуске
 		dispatch(resetTimer());
@@ -82,6 +92,7 @@ const Game = () => {
 		gameRef.current.focus(); // Фокусировка на игре после перезапуска
 	};
 	
+	// Модальное окно с проверкой языка
 	useEffect(() => {
 		const handleKeyPress = (event) => {
 			if (!isGameStarted || isGameEnd) return; // Проверка, идет ли игра и не завершена ли она
@@ -112,11 +123,20 @@ const Game = () => {
 		};
 	}, [isGameStarted, isGameEnd]);
 	
+	const words = text.split(' ');
+	
 	return (
-		<div className={style.theGame} tabIndex="0" onKeyPress={handleKeyPress} ref={gameRef}>
+		<div
+			className={style.theGame}
+			tabIndex="0"
+			onKeyPress={handleKeyPress}
+			ref={gameRef}
+		>
+			
 			<div className={`${style.language} ${showLanguageWarning ? style.show : ''}`}>
 				Переключите язык
 			</div>
+			
 			<p className={style.text}>
 				{text.split('').map((char, index) => (
 					<span
@@ -131,9 +151,12 @@ const Game = () => {
 										: ''
 						}
 					>
-                        {char === ' ' ? '\u00A0' : char}
+						{/*	заменяет пробелы на неразрывные пробелы (\u00A0), чтобы сохранить отображение символов и учитывать их при выравнивании и подсветке.*/}
+						{char === ' ' ? '\u00A0' : char}
                     </span>
-				))}
+				))
+				}
+				
 			</p>
 			<Modal
 				isOpen={isModalOpen}

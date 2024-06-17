@@ -5,6 +5,8 @@
   width: 100%;
   margin-right: 10px;
   //position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
   outline: none;
   z-index: 1; // Установим z-index для .theGame
   p {
@@ -12,9 +14,11 @@
     height: 100%;
     white-space: pre-wrap;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-grow: 1;
+    padding: 10px;
+
 
     span {
       display: flex;
@@ -26,8 +30,8 @@
 }
 
 .text {
-  z-index: 1; // Установим z-index для .text
-  //border: 1px solid white;
+  z-index: 1;
+  //background-color: teal;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,6 +39,7 @@
   font-size: 20px;
   letter-spacing: 1.2px;
   line-height: 1.5em;
+  flex-wrap: wrap;
 }
 
 .input {

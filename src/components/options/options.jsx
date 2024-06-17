@@ -56,6 +56,7 @@ const Options = () => {
 						dispatch(nextText());
 						dispatch(stopTimerThunk());
 						dispatch(resetTimer());
+						
 					}}
 				>
 					<MdOutlineRestartAlt className={style.restartIcon} />
