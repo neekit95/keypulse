@@ -1,37 +1,549 @@
+////////.theGame {
+////////  display: flex;
+////////  justify-content: center;
+////////  align-items: center;
+////////  width: 100%;
+////////  margin-right: 10px;
+////////  //position: relative;
+////////  overflow: hidden;
+////////  flex-wrap: wrap;
+////////  outline: none;
+////////  z-index: 1; // Установим z-index для .theGame
+////////  p {
+////////    white-space: pre-wrap;
+////////    display: flex;
+////////    justify-content: flex-start;
+////////    align-items: center;
+////////    flex-grow: 1;
+////////    padding: 10px;
+////////    max-width: 800px;
+////////
+////////  }
+////////}
+////////
+////////.text {
+////////  z-index: 1;
+////////  display: flex;
+////////  justify-content: center;
+////////  align-items: center;
+////////  text-align: justify;
+////////  font-size: 20px;
+////////  letter-spacing: 1.2px;
+////////  line-height: 1.5em;
+////////  flex-wrap: wrap;
+////////}
+////////
+//////////.text span {
+//////////  display: inline-block; /* Чтобы word-break работал */
+//////////  word-break: break-all; /* Позволяет символам переноситься на следующую строку */
+//////////}
+////////
+////////.tealBackground {
+////////  background-color: teal;
+////////}
+////////
+////////.error {
+////////  background-color: #de8981;
+////////}
+////////
+////////.correct {
+////////  color: #458a45;
+////////}
+////////
+////////.nextChar {
+////////  background-color: yellowgreen;
+////////}
+////////
+////////.modal {
+////////  background-color: #396aab;
+////////  position: absolute;
+////////  top: 50%;
+////////  left: 50%;
+////////  right: auto;
+////////  bottom: auto;
+////////  margin-right: -50%;
+////////  transform: translate(-50%, -50%);
+////////  padding: 50px;
+////////  border-radius: 10px;
+////////  outline: none;
+////////  display: flex;
+////////  justify-content: space-around;
+////////  font-size: 20px;
+////////  color: white;
+////////  z-index: 20; // Установим z-index для модального окна
+////////  .results {
+////////    display: flex;
+////////    justify-content: center;
+////////    align-items: center;
+////////    flex-direction: column;
+////////    width: 100%;
+////////    gap: 10px;
+////////    p {
+////////      display: flex;
+////////      justify-content: space-between;
+////////      align-items: center;
+////////      font-size: 20px;
+////////      width: 100%;
+////////      span {
+////////
+////////      }
+////////    }
+////////  }
+////////}
+////////
+////////.overlay {
+////////  background-color: rgba(0, 0, 0, 0.75);
+////////  width: 100vw;
+////////  height: 100vh;
+////////  position: absolute;
+////////  top: 0;
+////////  left: 0;
+////////  display: flex;
+////////  justify-content: center;
+////////  align-items: center;
+////////  cursor: pointer;
+////////}
+////////
+////////.language {
+////////  display: flex;
+////////  justify-content: center;
+////////  align-items: center;
+////////  width: 200px;
+////////  height: 100px;
+////////  position: absolute;
+////////  right: 0;
+////////  top: 80px;
+////////  transform: translateX(-50%);
+////////  //color: white;
+////////  background-color: #e34747;
+////////  font-size: 20px;
+////////  color: white;
+////////  border-radius: 10px;
+////////  z-index: 10; // Устанавливаем z-index для language выше, чем у .theGame
+////////  user-select: none;
+////////  transition: right 0.7s, opacity 0.5s;
+////////  opacity: 0; // Начальное значение прозрачности
+////////}
+////////
+////////.language.show {
+////////  right: 150px;
+////////  opacity: 1;
+////////}
+//////
+//////
+//////
+//////.theGame {
+//////  display: flex;
+//////  justify-content: center;
+//////  align-items: center;
+//////  width: 100%;
+//////  margin-right: 10px;
+//////  overflow: hidden;
+//////  flex-wrap: wrap;
+//////  outline: none;
+//////  z-index: 1;
+//////}
+//////
+//////.theGame p {
+//////  white-space: pre-wrap;
+//////  display: flex;
+//////  justify-content: flex-start;
+//////  align-items: center;
+//////  flex-grow: 1;
+//////  padding: 10px;
+//////  max-width: 800px;
+//////}
+//////
+//////.text {
+//////  z-index: 1;
+//////  display: flex;
+//////  justify-content: center;
+//////  align-items: center;
+//////  text-align: justify;
+//////  font-size: 20px;
+//////  letter-spacing: 1.2px;
+//////  line-height: 1.5em;
+//////  flex-wrap: wrap;
+//////}
+//////
+//////.tealBackground {
+//////  background-color: teal;
+//////}
+//////
+//////.error {
+//////  background-color: #de8981;
+//////}
+//////
+//////.correct {
+//////  color: #458a45;
+//////}
+//////
+//////.nextChar {
+//////  background-color: yellowgreen;
+//////}
+//////
+//////.modal {
+//////  background-color: #396aab;
+//////  position: absolute;
+//////  top: 50%;
+//////  left: 50%;
+//////  right: auto;
+//////  bottom: auto;
+//////  margin-right: -50%;
+//////  transform: translate(-50%, -50%);
+//////  padding: 50px;
+//////  border-radius: 10px;
+//////  outline: none;
+//////  display: flex;
+//////  justify-content: space-around;
+//////  font-size: 20px;
+//////  color: white;
+//////  z-index: 20;
+//////}
+//////
+//////.modal .results {
+//////  display: flex;
+//////  justify-content: center;
+//////  align-items: center;
+//////  flex-direction: column;
+//////  width: 100%;
+//////  gap: 10px;
+//////}
+//////
+//////.modal .results p {
+//////  display: flex;
+//////  justify-content: space-between;
+//////  align-items: center;
+//////  font-size: 20px;
+//////  width: 100%;
+//////}
+//////
+//////.overlay {
+//////  background-color: rgba(0, 0, 0, 0.75);
+//////  width: 100vw;
+//////  height: 100vh;
+//////  position: absolute;
+//////  top: 0;
+//////  left: 0;
+//////  display: flex;
+//////  justify-content: center;
+//////  align-items: center;
+//////  cursor: pointer;
+//////}
+//////
+//////.language {
+//////  display: flex;
+//////  justify-content: center;
+//////  align-items: center;
+//////  width: 200px;
+//////  height: 100px;
+//////  position: absolute;
+//////  right: 0;
+//////  top: 80px;
+//////  transform: translateX(-50%);
+//////  background-color: #e34747;
+//////  font-size: 20px;
+//////  color: white;
+//////  border-radius: 10px;
+//////  z-index: 10;
+//////  user-select: none;
+//////  transition: right 0.7s, opacity 0.5s;
+//////  opacity: 0;
+//////}
+//////
+//////.language.show {
+//////  right: 150px;
+//////  opacity: 1;
+//////}
+////
+////.theGame {
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  width: 100%;
+////  margin-right: 10px;
+////  overflow: hidden;
+////  flex-wrap: wrap;
+////  outline: none;
+////  z-index: 1;
+////}
+////
+////.theGame p {
+////  white-space: pre-wrap;
+////  display: flex;
+////  justify-content: flex-start;
+////  align-items: center;
+////  flex-grow: 1;
+////  padding: 10px;
+////  max-width: 800px;
+////}
+////
+////.text {
+////  z-index: 1;
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  text-align: justify;
+////  font-size: 20px;
+////  letter-spacing: 1.2px;
+////  line-height: 1.5em;
+////  flex-wrap: wrap;
+////}
+////
+////.tealBackground {
+////  background-color: teal;
+////}
+////
+////.error {
+////  background-color: #de8981;
+////}
+////
+////.correct {
+////  color: #458a45;
+////}
+////
+////.nextChar {
+////  background-color: yellowgreen;
+////}
+////
+////.modal {
+////  background-color: #396aab;
+////  position: absolute;
+////  top: 50%;
+////  left: 50%;
+////  right: auto;
+////  bottom: auto;
+////  margin-right: -50%;
+////  transform: translate(-50%, -50%);
+////  padding: 50px;
+////  border-radius: 10px;
+////  outline: none;
+////  display: flex;
+////  justify-content: space-around;
+////  font-size: 20px;
+////  color: white;
+////  z-index: 20;
+////}
+////
+////.modal .results {
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  flex-direction: column;
+////  width: 100%;
+////  gap: 10px;
+////}
+////
+////.modal .results p {
+////  display: flex;
+////  justify-content: space-between;
+////  align-items: center;
+////  font-size: 20px;
+////  width: 100%;
+////}
+////
+////.overlay {
+////  background-color: rgba(0, 0, 0, 0.75);
+////  width: 100vw;
+////  height: 100vh;
+////  position: absolute;
+////  top: 0;
+////  left: 0;
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  cursor: pointer;
+////}
+////
+////.language {
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  width: 200px;
+////  height: 100px;
+////  position: absolute;
+////  right: 0;
+////  top: 80px;
+////  transform: translateX(-50%);
+////  background-color: #e34747;
+////  font-size: 20px;
+////  color: white;
+////  border-radius: 10px;
+////  z-index: 10;
+////  user-select: none;
+////  transition: right 0.7s, opacity 0.5s;
+////  opacity: 0;
+////}
+////
+////.language.show {
+////  right: 150px;
+////  opacity: 1;
+////}
+//
+//.theGame {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  width: 100%;
+//  //background-color: red;
+//  margin-right: 10px;
+//  overflow: hidden;
+//  flex-wrap: wrap;
+//  outline: none;
+//  z-index: 1;
+//  padding: 10px;
+//}
+//
+//.theGame p {
+//  white-space: pre-wrap;
+//  display: flex;
+//  justify-content: flex-start;
+//  align-items: center;
+//  flex-grow: 1;
+//  padding: 10px;
+//  //max-width: 800px;
+//}
+//
+//.text {
+//  z-index: 1;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  text-align: justify;
+//  font-size: 20px;
+//  letter-spacing: 1.2px;
+//  line-height: 1.5em;
+//  flex-wrap: wrap;
+//}
+//
+//.tealBackground {
+//  background-color: teal;
+//}
+//
+//.error {
+//  background-color: #de8981;
+//}
+//
+//.correct {
+//  color: #458a45;
+//}
+//
+//.nextChar {
+//  background-color: yellowgreen;
+//}
+//
+//.modal {
+//  background-color: #396aab;
+//  position: absolute;
+//  top: 50%;
+//  left: 50%;
+//  right: auto;
+//  bottom: auto;
+//  margin-right: -50%;
+//  transform: translate(-50%, -50%);
+//  padding: 50px;
+//  border-radius: 10px;
+//  outline: none;
+//  display: flex;
+//  justify-content: space-around;
+//  font-size: 20px;
+//  color: white;
+//  z-index: 20;
+//}
+//
+//.modal .results {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  flex-direction: column;
+//  width: 100%;
+//  gap: 10px;
+//}
+//
+//.modal .results p {
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  font-size: 20px;
+//  width: 100%;
+//}
+//
+//.overlay {
+//  background-color: rgba(0, 0, 0, 0.75);
+//  width: 100vw;
+//  height: 100vh;
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  cursor: pointer;
+//}
+//
+//.language {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  width: 200px;
+//  height: 100px;
+//  position: absolute;
+//  right: 0;
+//  top: 80px;
+//  transform: translateX(-50%);
+//  background-color: #e34747;
+//  font-size: 20px;
+//  color: white;
+//  border-radius: 10px;
+//  z-index: 10;
+//  user-select: none;
+//  transition: right 0.7s, opacity 0.5s;
+//  opacity: 0;
+//}
+//
+//.language.show {
+//  right: 150px;
+//  opacity: 1;
+//}
+//
+//.word {
+//  display: inline-block; /* Делаем каждое слово блочным элементом, чтобы управлять пробелами */
+//  white-space: pre; /* Поддерживаем пробелы и переносы строки */
+//    //color: white;
+//  //background-color: seagreen;
+//  //margin: 5px;
+//  //background-color: teal;
+//}
+//
+//.char {
+//  background-color: yellow;
+//}
+
+
 .theGame {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-right: 10px;
-  //position: relative;
   overflow: hidden;
   flex-wrap: wrap;
   outline: none;
-  z-index: 1; // Установим z-index для .theGame
-  p {
-    width: 100%;
-    height: 100%;
-    white-space: pre-wrap;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-grow: 1;
-    padding: 10px;
+  z-index: 1;
+  padding: 10px;
+}
 
-
-    span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: auto;
-    }
-  }
+.theGame p {
+  white-space: pre-wrap;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
 }
 
 .text {
   z-index: 1;
-  //background-color: teal;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,17 +554,8 @@
   flex-wrap: wrap;
 }
 
-.input {
-  border: 1px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: justify;
-  padding: 10px 35px 10px 15px;
-  font-size: 20px;
-  letter-spacing: 1.2px;
-  line-height: 1.5em;
-  width: 100%;
+.tealBackground {
+  background-color: teal;
 }
 
 .error {
@@ -83,25 +586,24 @@
   justify-content: space-around;
   font-size: 20px;
   color: white;
-  z-index: 20; // Установим z-index для модального окна
-  .results {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    p {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 20px;
-      width: 100%;
-      span {
+  z-index: 20;
+}
 
-      }
-    }
-  }
+.modal .results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.modal .results p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
 }
 
 .overlay {
@@ -127,18 +629,22 @@
   right: 0;
   top: 80px;
   transform: translateX(-50%);
-  //color: white;
   background-color: #e34747;
   font-size: 20px;
   color: white;
   border-radius: 10px;
-  z-index: 10; // Устанавливаем z-index для language выше, чем у .theGame
+  z-index: 10;
   user-select: none;
   transition: right 0.7s, opacity 0.5s;
-  opacity: 0; // Начальное значение прозрачности
+  opacity: 0;
 }
 
 .language.show {
   right: 150px;
   opacity: 1;
+}
+
+.word {
+  display: inline-block; /* Делаем каждое слово блочным элементом, чтобы управлять пробелами */
+  white-space: pre; /* Поддерживаем пробелы и переносы строки */
 }
