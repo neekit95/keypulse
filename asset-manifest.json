@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/keyboard-simulator/static/css/main.a7cd0306.css",
+    "main.js": "/keyboard-simulator/static/js/main.b3bed7b6.js",
+    "index.html": "/keyboard-simulator/index.html",
+    "main.a7cd0306.css.map": "/keyboard-simulator/static/css/main.a7cd0306.css.map",
+    "main.b3bed7b6.js.map": "/keyboard-simulator/static/js/main.b3bed7b6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a7cd0306.css",
+    "static/js/main.b3bed7b6.js"
+  ]
+}
