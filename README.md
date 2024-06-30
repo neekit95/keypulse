@@ -1,2 +1,2 @@
 # Клавиатурный тренажер
-## Протестировать можно [https://neekit95.github.io/keyboard-simulator/(здесь)]
+## [Протестировать](https://neekit95.github.io/keyboard-simulator/)
