@@ -1,21 +1,18 @@
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
-import textsReducer from "./slices/textsSlice";
-import timerReducer from "./slices/timerSlice";
-import speedReducer from "./slices/speedSlice";
-import accuracyReducer from "./slices/accuracySlice";
+import {configureStore} from "@reduxjs/toolkit";
+import textsSlice from "./slices/textsSlice";
+import timerSlice from "./slices/timerSlice";
+import speedSlice from "./slices/speedSlice";
+import accuracySlice from "./slices/accuracySlice";
 
-const rootReducer = combineReducers({
-    texts: textsReducer,
-    timer: timerReducer,
-    speed: speedReducer,
-    accuracy: accuracyReducer,
-})
-
-export type RootState = ReturnType<typeof rootReducer>;
-
-export const store = configureStore({
-    reducer: rootReducer,
+const store = configureStore({
+    reducer: {
+        texts: textsSlice,
+        timer: timerSlice,
+        speed: speedSlice,
+        accuracy: accuracySlice,
+    },
 });
-
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

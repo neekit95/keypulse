@@ -1,4 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AppDispatch, RootState} from "../store";
 
 type IntervalId = ReturnType<typeof setInterval> | null;
 let intervalId: IntervalId = null;
@@ -34,7 +35,7 @@ const timerSlice = createSlice({
 
 export const {startTimer, stopTimer, resetTimer, updateTimer} = timerSlice.actions;
 
-export const startTimerThunk = () => (dispatch: any, getState: any) => {
+export const startTimerThunk = () => (dispatch: AppDispatch, getState: () => RootState) => {
     const {isTimerStarted} = getState().timer;
     if (!isTimerStarted) {
         dispatch(startTimer());
