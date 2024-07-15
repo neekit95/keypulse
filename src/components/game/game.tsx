@@ -96,6 +96,7 @@ const Game = () => {
         }
     };
 
+
     // useEffect(() => {
     //     const handleKeyPress: EventListener = (event) => {
     //         const keyboardEvent = event as KeyboardEvent; // Приведение типа к KeyboardEvent
@@ -104,22 +105,21 @@ const Game = () => {
     //
     //         const char = keyboardEvent.key;
     //
-    //         if (/[.,\/#!$%\^&\*;:{}=\-_`~()"'\s\t\n1234567890]/.test(char)) {
-    //             setCurrentLanguage('sign');
-    //         }
-    //             // Проверяем, является ли символ знаком пунктуации или пробелом
-    //             // if (/[.,\/#!$%\^&\*;:{}=\-_`~()"`' 1234567890]/.test(char)) {
-    //             //     setCurrentLanguage('sign');
-    //             // }
-    //         // Проверяем, принадлежит ли символ русскому алфавиту
-    //         else if ((char >= 'а' && char <= 'я') || char === 'ё' || (char >= 'А' && char <= 'Я')) {
-    //             setCurrentLanguage('Russian');
-    //         } else {
+    //         // Проверяем, является ли символ английской буквой
+    //         if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
     //             setCurrentLanguage('English');
     //             setShowLanguageWarning(true);
     //             setTimeout(() => {
     //                 setShowLanguageWarning(false);
     //             }, 1500); // Уведомление будет показываться 1.5 секунды
+    //         }
+    //         // Проверяем, принадлежит ли символ русскому алфавиту
+    //         else if ((char >= 'а' && char <= 'я') || char === 'ё' || (char >= 'А' && char <= 'Я')) {
+    //             setCurrentLanguage('Russian');
+    //         }
+    //         // Проверяем, является ли символ знаком пунктуации или пробелом
+    //         else if (/[.,\/#!$%\^&\*;:{}=\-_`~()"'\s\t\n1234567890]/.test(char)) {
+    //             setCurrentLanguage('sign');
     //         }
     //     };
     //
@@ -130,43 +130,40 @@ const Game = () => {
     //     return () => {
     //         document.removeEventListener('keydown', handleKeyPress);
     //     };
-    // }, [isGameStarted, isGameEnd]); // Зависимости useEffect
-
+    // }, [isGameStarted, isGameEnd]);
 
     useEffect(() => {
-        const handleKeyPress: EventListener = (event) => {
-            const keyboardEvent = event as KeyboardEvent; // Приведение типа к KeyboardEvent
-
+        const handleKeyPress = (event: KeyboardEvent) => {
             if (!isGameStarted || isGameEnd) return; // Проверка, идет ли игра и не завершена ли она
 
-            const char = keyboardEvent.key;
+            const char = event.key;
 
-            // Проверяем, является ли символ английской буквой
-            if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
+            // Проверяем, является ли символ знаком пунктуации или пробелом
+            if (/[.,\/#!$%\^&\*;:{}=\-_`~()"`' 1234567890]/.test(char) || char === 'Backspace') {
+                setCurrentLanguage('sign');
+            }
+            // Проверяем, принадлежит ли символ русскому алфавиту
+            else if ((char >= 'а' && char <= 'я') || char === 'ё' || (char >= 'А' &&
+                char <= 'Я'
+            )) {
+                setCurrentLanguage('Russian');
+            } else {
                 setCurrentLanguage('English');
                 setShowLanguageWarning(true);
                 setTimeout(() => {
                     setShowLanguageWarning(false);
                 }, 1500); // Уведомление будет показываться 1.5 секунды
             }
-            // Проверяем, принадлежит ли символ русскому алфавиту
-            else if ((char >= 'а' && char <= 'я') || char === 'ё' || (char >= 'А' && char <= 'Я')) {
-                setCurrentLanguage('Russian');
-            }
-            // Проверяем, является ли символ знаком пунктуации или пробелом
-            else if (/[.,\/#!$%\^&\*;:{}=\-_`~()"'\s\t\n1234567890]/.test(char)) {
-                setCurrentLanguage('sign');
-            }
         };
 
-        // Добавляем обработчик события keydown
-        document.addEventListener('keydown', handleKeyPress);
-
-        // Очистка обработчика при размонтировании компонента
+        // Добавляем слушатель события keypress для определения языка при вводе символов
+        document.addEventListener('keypress', handleKeyPress);
         return () => {
-            document.removeEventListener('keydown', handleKeyPress);
+            // Убираем слушатель при размонтировании компонента
+            document.removeEventListener('keypress', handleKeyPress);
         };
     }, [isGameStarted, isGameEnd]);
+
 
     // Разбиение текста на слова
     const words = text.split(' ');
