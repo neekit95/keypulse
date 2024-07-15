@@ -15,6 +15,7 @@ import {resetTimer, startTimerThunk, stopTimerThunk} from '../../redux/slices/ti
 import style from './game.module.scss';
 import {updateAccuracy} from '../../redux/slices/accuracySlice';
 import {AppDispatch, RootState} from "../../redux/store";
+import TextDisplay from "./text-display/TextDisplay";
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
@@ -97,41 +98,6 @@ const Game = () => {
     };
 
 
-    // useEffect(() => {
-    //     const handleKeyPress: EventListener = (event) => {
-    //         const keyboardEvent = event as KeyboardEvent; // Приведение типа к KeyboardEvent
-    //
-    //         if (!isGameStarted || isGameEnd) return; // Проверка, идет ли игра и не завершена ли она
-    //
-    //         const char = keyboardEvent.key;
-    //
-    //         // Проверяем, является ли символ английской буквой
-    //         if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
-    //             setCurrentLanguage('English');
-    //             setShowLanguageWarning(true);
-    //             setTimeout(() => {
-    //                 setShowLanguageWarning(false);
-    //             }, 1500); // Уведомление будет показываться 1.5 секунды
-    //         }
-    //         // Проверяем, принадлежит ли символ русскому алфавиту
-    //         else if ((char >= 'а' && char <= 'я') || char === 'ё' || (char >= 'А' && char <= 'Я')) {
-    //             setCurrentLanguage('Russian');
-    //         }
-    //         // Проверяем, является ли символ знаком пунктуации или пробелом
-    //         else if (/[.,\/#!$%\^&\*;:{}=\-_`~()"'\s\t\n1234567890]/.test(char)) {
-    //             setCurrentLanguage('sign');
-    //         }
-    //     };
-    //
-    //     // Добавляем обработчик события keydown
-    //     document.addEventListener('keydown', handleKeyPress);
-    //
-    //     // Очистка обработчика при размонтировании компонента
-    //     return () => {
-    //         document.removeEventListener('keydown', handleKeyPress);
-    //     };
-    // }, [isGameStarted, isGameEnd]);
-
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
             if (!isGameStarted || isGameEnd) return; // Проверка, идет ли игра и не завершена ли она
@@ -173,56 +139,18 @@ const Game = () => {
     };
 
     return (
-        <div className={style.theGame} tabIndex={0} onKeyPress={(e: React.KeyboardEvent) => handleKeyPress(e)}
-             ref={gameRef}>
+        <div
+            className={style.theGame}
+            tabIndex={0}
+            onKeyPress={(e: React.KeyboardEvent) => handleKeyPress(e)}
+            ref={gameRef}
+        >
+
             <div className={`${style.language} ${showLanguageWarning ? style.show : ''}`}>
                 Переключите язык
             </div>
 
-            <p className={style.text}>
-                {words.map((word: string, wordIndex: number) => (
-                    <React.Fragment key={wordIndex}>
-                        {wordIndex > 0 && (
-                            <span
-                                className={
-                                    getAbsoluteIndex(wordIndex - 1, words[wordIndex - 1].length) === currentError
-                                        ? style.error
-                                        : getAbsoluteIndex(wordIndex - 1, words[wordIndex - 1].length) === currentIndex
-                                            ? style.nextChar
-                                            : getAbsoluteIndex(wordIndex - 1, words[wordIndex - 1].length) < inputText.length
-                                                ? style.correct
-                                                : ''
-                                }
-                            >
-                            {' '}
-                          </span>
-                        )}
-                        <span className={style.word}>
-                            {word.split('').map((char, charIndex) => {
-                                const absoluteIndex = getAbsoluteIndex(wordIndex, charIndex);
-
-                                return (
-                                    <span
-                                        key={absoluteIndex}
-                                        className={
-                                            absoluteIndex === currentError
-                                                ? style.error
-                                                : absoluteIndex === currentIndex
-                                                    ? style.nextChar
-                                                    : absoluteIndex < inputText.length
-                                                        ? style.correct
-                                                        : ''
-                                        }
-                                    >
-                                {char}
-                              </span>
-                                );
-                            })}
-                        </span>
-                    </React.Fragment>
-                ))}
-            </p>
-
+            <TextDisplay text={text} currentError={currentError} currentIndex={currentIndex} inputText={inputText}/>
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={handleRestart}
