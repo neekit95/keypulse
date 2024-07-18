@@ -15,7 +15,8 @@ import {resetTimer, startTimerThunk, stopTimerThunk} from '../../redux/slices/ti
 import style from './game.module.scss';
 import {updateAccuracy} from '../../redux/slices/accuracySlice';
 import {AppDispatch, RootState} from "../../redux/store";
-import TextDisplay from "./text-display/TextDisplay";
+import TextDisplay from "./text-display/text-display";
+import GameResultsModal from "../modal-window/game-results-modal";
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
@@ -131,18 +132,14 @@ const Game = () => {
     }, [isGameStarted, isGameEnd]);
 
 
-    // Разбиение текста на слова
-    const words = text.split(' ');
-
-    const getAbsoluteIndex = (wordIndex: number, charIndex: number) => {
-        return words.slice(0, wordIndex).join('').length + charIndex + wordIndex;
-    };
-
     return (
         <div
             className={style.theGame}
             tabIndex={0}
-            onKeyPress={(e: React.KeyboardEvent) => handleKeyPress(e)}
+            onKeyPress={
+                // (e) => handleKeyPress(e)
+                handleKeyPress
+            }
             ref={gameRef}
         >
 
@@ -150,30 +147,20 @@ const Game = () => {
                 Переключите язык
             </div>
 
-            <TextDisplay text={text} currentError={currentError} currentIndex={currentIndex} inputText={inputText}/>
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={handleRestart}
-                contentLabel="Результаты игры"
-                className={style.modal}
-                overlayClassName={style.overlay}
-            >
-                <h2>Результаты игры</h2>
-                <div className={style.results}>
-                    <p>
-                        Количество ошибок: <span>{errorCount}</span>
-                    </p>
-                    <p>
-                        Точность (%): <span>{accuracy}</span>
-                    </p>
-                    <p>
-                        Скорость (зн/мин): <span>{useSelector((state: RootState) => state.speed.value)}</span>
-                    </p>
-                </div>
-                <button onClick={handleRestart} ref={modalButtonRef}>
-                    Начать заново
-                </button>
-            </Modal>
+            <TextDisplay
+                text={text}
+                currentError={currentError}
+                currentIndex={currentIndex}
+                inputText={inputText}
+            />
+            <GameResultsModal
+                isModalOpen={isModalOpen}
+                errorCount={errorCount}
+                accuracy={accuracy}
+                speed={useSelector((state: RootState) => state.speed.value)}
+                handleRestart={handleRestart}
+                modalButtonRef={modalButtonRef}
+            />
         </div>
     );
 };

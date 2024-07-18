@@ -1,0 +1,44 @@
+.container {
+  white-space: pre-wrap;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
+  //background-color: red;
+}
+
+
+.text {
+  //background-color: teal;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: justify;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  line-height: 1.7em;
+  flex-wrap: wrap;
+}
+
+.tealBackground {
+  background-color: teal;
+}
+
+.error {
+  background-color: #de8981;
+}
+
+.correct {
+  color: #458a45;
+}
+
+.nextChar {
+  background-color: yellowgreen;
+}
+
+.word {
+  display: inline-block; /* Делаем каждое слово блочным элементом, чтобы управлять пробелами */
+  white-space: pre; /* Поддерживаем пробелы и переносы строки */
+}

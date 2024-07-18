@@ -2,12 +2,38 @@
   position: fixed;
   width: 100vw;
   top: 0;
-  font-size: 24px;
+  font-size: 22px;
   background-color: #396aab;
   color: white;
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   letter-spacing: 0.8px;
+  padding: 0 calc(10vw + 15px);
+}
+
+.profile {
+  //background-color: red;
+  min-width: 200px;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 22px;
+    background-color: #396aab;
+    color: white;
+    gap: 10px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #335d98;
+    }
+  }
 }
