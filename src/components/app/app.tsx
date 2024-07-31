@@ -1,4 +1,3 @@
-// import style from './app.module.scss';
 import Header from "../header/header";
 import Options from "../options/options";
 import Game from "../game/game";
