@@ -12,16 +12,20 @@ const Header = () => {
                 <div className={style.links}>
                     <Link to='/'>
                         <button>
-                            <BsKeyboard className={style.icon}/>
-                            KeyPulse
+                            <BsKeyboard className={`${style.icon} ${style.firstIcon}`}/>
+                            <p>
+                                KeyPulse
+                            </p>
                         </button>
                     </Link>
                 </div>
                 <div className={style.links}>
                     <Link to='/user'>
                         <button>
-                            <VscAccount className={style.icon}/>
-                            My Profile
+                            <VscAccount className={`${style.icon} ${style.secondIcon}`}/>
+                            <p>
+                                My Profile
+                            </p>
                         </button>
                     </Link>
                 </div>
