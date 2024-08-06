@@ -28,11 +28,20 @@
     color: white;
     gap: 10px;
     border-radius: 5px;
+    font-family: "Carter One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    overflow: hidden;
 
     &:hover {
       background-color: #335d98;
     }
   }
+}
+
+
+.icon {
+  font-size: 25px;
 }
 
 .wrapper {
@@ -43,4 +52,10 @@
   flex-grow: 1;
   width: 100%;
   padding: 0 20px;
+}
+
+.logo {
+  font-family: "Carter One", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
