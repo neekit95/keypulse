@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import HomePage from "../pages/home-page";
 import NotFountPage from "../pages/not-found-page/not-fount-page";
-import UserPage from "../pages/user-page";
+import UserPage from "../pages/user-page/user-page";
 
 
 const AppRoutes: React.FC = () => {

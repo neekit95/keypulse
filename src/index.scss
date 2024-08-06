@@ -5,15 +5,36 @@
   box-sizing: border-box;
   font-family: "Roboto Condensed", sans-serif;
   font-style: normal;
+}
 
+root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+  //background-color: red;
+}
+
+body, html {
+  background-color: #abb7bc;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+  //background-color: red;
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
-  /*background-color: red;*/
+  max-width: 1200px;
+  //background-color: tan;
+  overflow: hidden;
 }
 
 button {

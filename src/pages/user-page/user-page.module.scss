@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 100vw;
+  min-height: calc(100vh - 60px);
+  height: 100%;
+}
+
+.wrapper {
+  margin-top: 60px;
+  //background-color: #8080a1;
+  min-height: calc(100vh - 60px);
+  //background-color: red;
+  color: white;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: 20px 10px;
+
+}
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  background-color: teal;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    span {
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Special Elite", system-ui;
+      color: #396aab;
+    }
+  }
+}
