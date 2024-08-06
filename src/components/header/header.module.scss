@@ -1,21 +1,18 @@
 .container {
   position: fixed;
-  width: 100vw;
+  width: 100vw;;
+  height: 60px;
   top: 0;
   font-size: 22px;
   background-color: #396aab;
   color: white;
-  height: 60px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   letter-spacing: 0.8px;
-  padding: 0 calc(10vw + 15px);
 }
 
-.profile {
-  //background-color: red;
-  min-width: 200px;
+.links {
   height: 90%;
   display: flex;
   justify-content: center;
@@ -36,4 +33,14 @@
       background-color: #335d98;
     }
   }
+}
+
+.wrapper {
+  max-width: 1240px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 20px;
 }
