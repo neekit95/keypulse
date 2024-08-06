@@ -17,10 +17,11 @@
 
 button {
   opacity: 90%;
- &:hover {
-   opacity: 100%;
-   cursor: pointer;
- }
+  cursor: pointer;
+
+  &:hover {
+    opacity: 100%;
+  }
 }
 
 .ReactModal__Overlay {
@@ -48,7 +49,7 @@ button {
   border-radius: 10px;
   //background-color: teal;
   button {
-    width: 200px ;
+    width: 200px;
     height: 50px;
     font-size: 20px;
     border-radius: 5px;

@@ -1,0 +1,40 @@
+.container {
+  //background-color: #b01414;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5%;
+
+  h1 {
+    span {
+      color: red;
+      //text-decoration: underline;
+      padding: 10px;
+    }
+  }
+}
+
+.nav {
+  //background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  //flex-direction: column;
+  font-size: 18px;
+
+  button {
+    padding: 10px 20px;
+    cursor: pointer;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: #396aab;
+    color: white;
+  }
+}
