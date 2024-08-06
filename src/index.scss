@@ -18,6 +18,8 @@
 button {
   opacity: 90%;
   cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
 
   &:hover {
     opacity: 100%;

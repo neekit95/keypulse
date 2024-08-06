@@ -4,7 +4,6 @@ import {VscAccount} from "react-icons/vsc";
 import {Link} from 'react-router-dom';
 
 const Header = () => {
-    console.log('Rendering Header component');
     return (
         <div className={style.container}>
             <div className={style.name}>

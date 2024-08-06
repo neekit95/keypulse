@@ -2,7 +2,7 @@ import React from 'react';
 import style from './not-found-page.module.scss'
 import {Link} from 'react-router-dom'
 
-const NotFountPage = () => {
+const NotFountPage: React.FC = () => {
     return (
         <div className={style.container}>
             <h1>

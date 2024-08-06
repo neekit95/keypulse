@@ -5,7 +5,7 @@ import store from "./redux/store";
 import './index.scss';
 import App from "./components/app/app";
 import Modal from "react-modal";
-
+import {BrowserRouter} from "react-router-dom";
 
 Modal.setAppElement('#root');
 
@@ -13,8 +13,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App/>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );

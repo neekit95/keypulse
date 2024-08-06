@@ -20,7 +20,7 @@ import GameResultsModal from "../modal-window/game-results-modal";
 
 Modal.setAppElement('#root'); // Устанавливаем элемент для aria
 
-const Game = () => {
+const Game: React.FC = () => {
     const text: string = useSelector((state: RootState) => state.texts.value);
     const {
         inputText, currentError, currentIndex, isGameEnd, correctSymbols, isGameStarted, errorCount

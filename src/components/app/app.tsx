@@ -3,7 +3,7 @@ import AppRoutes from "../../app-routes/app-routes";
 import style from './app.module.scss';
 import Header from "../header/header";
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <div className={style.container}>
             <Header/>
