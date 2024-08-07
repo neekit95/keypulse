@@ -9,31 +9,46 @@
 
 .wrapper {
   margin-top: 60px;
-  //background-color: #8080a1;
+  //background-color: #396aab;
   min-height: calc(100vh - 60px);
-  //background-color: red;
-  color: white;
+  background-color: white;
+  color: #505050;
   width: 100%;
   max-width: 1200px;
   height: 100%;
   padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 
 }
 
 .profile {
+  font-weight: 400;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
-  background-color: teal;
+  //width: %;
+  background-color: #efefef;
+  padding: 20px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+
+  .h2NotBottom {
+    border-bottom: none;
+
+  }
 
   h2 {
     display: flex;
+    font-weight: 500;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #396aab;
 
     p {
       font-weight: 400;

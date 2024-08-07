@@ -3,7 +3,10 @@ import style from './user-page.module.scss'
 
 const UserPage = () => {
     const [name, setName] = useState('Рыбалкин Никита');
-    const [result, setResult] = useState('100%  320 зн/м');
+    const [bestAccuracy, setBestAccuracy] = useState(100);
+    const [middleAccuracy, setMiddleAccuracy] = useState(96.3);
+    const [bestSpeed, setBestSpeed] = useState(324)
+    const [middleSpeed, setMiddleSpeed] = useState(301);
     const [rang, setRang] = useState('Gold');
 
     return (
@@ -13,11 +16,18 @@ const UserPage = () => {
                     <h1>
                         {name}
                     </h1>
-                    <h2>Ваш ранг: <span> {rang}</span></h2>
+                    <h2>
+                        Ваш ранг: <span> {rang} </span>
+                    </h2>
                     <h2>
                         Лучший результат:
-                        <p>Точность: <span>100</span> %</p>
-                        <p>Скорость: <span>324</span> зн/м</p>
+                        <p>Точность: <span>{bestSpeed}</span> %</p>
+                        <p>Скорость: <span>{bestAccuracy}</span> зн/м</p>
+                    </h2>
+                    <h2 className={style.h2NotBottom}>
+                        Средний результат:
+                        <p>Точность: <span>{middleAccuracy}</span> %</p>
+                        <p>Скорость: <span>{middleSpeed}</span> зн/м</p>
                     </h2>
                 </div>
 
