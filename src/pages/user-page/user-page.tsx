@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 const UserPage = () => {
 	const [name, setName] = useState<string | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(true);
-	const [readyToClear, setReadyToClear] = useState(false);
 	const [isOpenClearModal, setIsOpenClearModal] = useState(false);
 
 	interface User {
@@ -38,17 +37,19 @@ const UserPage = () => {
 		}
 	}
 
-
+	// Ф-ция для сохранения в localstorage
 	const saveLocal = (element: string | null, defenition: string | null) => {
 		if (element !== null && defenition !== null) {
 			localStorage.setItem(element, defenition)
 		}
 	}
 
+	// Вводимые данные в поле input для name
 	const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value);
 	}
 
+	// Ф-ция для отправки в localstorage и закрытия модального окна
 	function handleSubmit() {
 		if (name) {
 			saveLocal('userName', name);
@@ -58,6 +59,7 @@ const UserPage = () => {
 		}
 	}
 
+	// Ф-ция для очистки localstorage, очистки всех данных
 	function clearLocal() {
 		localStorage.clear();
 		setIsOpenClearModal(false);
@@ -66,69 +68,108 @@ const UserPage = () => {
 
 	}
 
+
 	return (
 		<div className={style.container}>
+			{/* Если нет userName, выдаем модальное окно для его ввода*/}
 			{user.userName === null ?
-				<Modal className={style.modal}
-					   isOpen={isModalOpen}>
+				<Modal
+					className={style.modal}
+					isOpen={isModalOpen}
+				>
 					<div className={style.divInput}>
 						<label htmlFor="username">
-							UserName:
+							Ваше Имя
 						</label>
-						<input
-							type="text"
-							placeholder='Enter your username'
-							name='username'
-							onChange={inputChange}
-							value={name || ''}
-							onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-						/>
+						<div className={style.inputAndButton}>
+							<input
+								type="text"
+								placeholder='Введите ваше имя или псевдоним'
+								name='username'
+								onChange={inputChange}
+								value={name || ''}
+								onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+							/>
 
+
+							<button className={style.buttonSave} onClick={handleSubmit}>
+								Save
+							</button>
+						</div>
 					</div>
-					<button className={style.buttonSave} onClick={handleSubmit}>
-						Save
-					</button>
-				</Modal> :
+
+				</Modal>
+				:
+				// Если есть данные о username, то выдаем основной контент.
 				(<div className={style.wrapper}>
+
+					{/* Модальное окно для подтверждения удаления */}
 					<Modal isOpen={isOpenClearModal} className={style.modal}>
 						<h2>Подтвердить удаление</h2>
-						<button onClick={clearLocal}>Да</button>
-						<button onClick={() => setIsOpenClearModal(false)}>Нет</button>
+						<div className={style.delButtons}>
+							<button onClick={clearLocal}>Да</button>
+							<button onClick={() => setIsOpenClearModal(false)}>Нет</button>
+						</div>
+
 					</Modal>
-					<div className={style.profile}>
-						<h1>
-							{user.userName}
-						</h1>
-						<h2>
-							Ваш ранг:
+
+					<div className={style.top}>
+						<div className={style.profile}>
+
+							<h1> {user.userName} </h1>
+
+							<h2> Ваш ранг:
+								{
+									user.userRang ? (
+											<span> {user.userRang}</span>
+										) :
+										<p> - </p>
+								}
+							</h2>
+
+							<h2>
+								Лучший результат:
+								{
+									user.userAccuracy ? (
+										<div>
+											<p>Точность: <span>{user.userBestResult.userBestSpeed}</span> %</p>
+											<p>Скорость: <span>{user.userBestResult.userBestSpeed}</span> зн/м</p>
+										</div>
+									) : <p> - </p>
+								}
+
+							</h2>
+
+							<h2 className={style.h2NotBottom}>
+								Средний результат:
+								{
+									user.userAccuracy ? (
+										<div>
+											<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>
+											<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>
+										</div>
+									) : <p> - </p>
+								}
+							</h2>
+						</div>
+						<div className={style.lastResults}>
+							<h1> Предыдущие результаты: </h1>
 							{
-								user.userRang ? (
-										<span>
-							{user.userRang}
-							</span>
-									) :
-									<p>
-										Пройдите тест
-									</p>
+								user.userAccuracy ? (
+									<div>
+										<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>
+										<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>
+									</div>
+								) : <p> - </p>
 							}
-
-						</h2>
-						<h2>
-							Лучший результат:
-							<p>Точность: <span>{user.userBestResult.userBestSpeed}</span> %</p>
-							<p>Скорость: <span>{user.userBestResult.userBestSpeed}</span> зн/м</p>
-						</h2>
-						<h2 className={style.h2NotBottom}>
-							Средний результат:
-							<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>
-							<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>
-						</h2>
+						</div>
 					</div>
 
-					<div className={style.lastResults}>
 
-					</div>
-					<button onClick={() => setIsOpenClearModal(true)}>
+					<button
+						className={style.deleteButton}
+						onClick={() => setIsOpenClearModal(true)}
+					>
 						Удалить данные
 					</button>
 				</div>)
