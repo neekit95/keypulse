@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import style from './user-page.module.scss'
 import Modal from 'react-modal';
+import LastResults from "../../components/last-results/last-results";
 
 const UserPage = () => {
 	const [name, setName] = useState<string | null>(null);
@@ -43,6 +44,41 @@ const UserPage = () => {
 			localStorage.setItem(element, defenition)
 		}
 	}
+
+	let lastResults = [
+		{
+			speed: 231,
+			accuracy: 100,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		},
+		{
+			speed: 251,
+			accuracy: 97,
+		}
+	]
 
 	// Вводимые данные в поле input для name
 	const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,22 +156,24 @@ const UserPage = () => {
 
 							<h2> Ваш ранг:
 								{
-									user.userRang ? (
-											<span> {user.userRang}</span>
-										) :
-										<p> - </p>
+									// user.userRang ? (
+									// 		<span> {user.userRang}</span>
+									<span> Gold </span>
+									// ) : <p> - </p>
 								}
 							</h2>
 
 							<h2>
 								Лучший результат:
 								{
-									user.userAccuracy ? (
-										<div>
-											<p>Точность: <span>{user.userBestResult.userBestSpeed}</span> %</p>
-											<p>Скорость: <span>{user.userBestResult.userBestSpeed}</span> зн/м</p>
-										</div>
-									) : <p> - </p>
+									// user.userAccuracy ? (
+									<div>
+										{/*<p>Точность: <span>{user.userBestResult.userBestSpeed}</span> %</p>*/}
+										{/*<p>Скорость: <span>{user.userBestResult.userBestSpeed}</span> зн/м</p>*/}
+										<p>Скорость: <span>250</span> зн/м</p>
+										<p>Точность: <span>100</span> %</p>
+									</div>
+									// ) : <p> - </p>
 								}
 
 							</h2>
@@ -143,24 +181,29 @@ const UserPage = () => {
 							<h2 className={style.h2NotBottom}>
 								Средний результат:
 								{
-									user.userAccuracy ? (
-										<div>
-											<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>
-											<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>
-										</div>
-									) : <p> - </p>
+									// user.userAccuracy ? (
+									<div>
+										{/*<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>*/}
+										{/*<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>*/}
+										<p>Скорость: <span>250</span> зн/м</p>
+										<p>Точность: <span>100</span> %</p>
+									</div>
+									// ) : <p> - </p>
 								}
 							</h2>
 						</div>
 						<div className={style.lastResults}>
 							<h1> Предыдущие результаты: </h1>
 							{
-								user.userAccuracy ? (
-									<div>
-										<p>Точность: <span>{user.userMiddleResult.userMiddleSpeed}</span> %</p>
-										<p>Скорость: <span>{user.userMiddleResult.userMiddleSpeed}</span> зн/м</p>
-									</div>
-								) : <p> - </p>
+								// user.userAccuracy ? (
+								<div className={style.lastResultsMap}>
+									{
+										lastResults.map((result) => (
+											<LastResults speed={result.speed} accuracy={result.accuracy}/>
+										))
+									}
+								</div>
+								// ) : <p> - </p>
 							}
 						</div>
 					</div>
