@@ -4,12 +4,13 @@ import style from './app.module.scss';
 import Header from "../header/header";
 
 const App: React.FC = () => {
-    return (
-        <div className={style.container}>
-            <Header/>
-            <AppRoutes/>
-        </div>
-    );
+
+	return (
+		<div className={style.container}>
+			<Header/>
+			<AppRoutes/>
+		</div>
+	);
 };
 
 export default App;
