@@ -28,6 +28,7 @@ const Options = () => {
 		}
 	}, [isGameStarted, correctSymbols, timer, dispatch]);
 	
+	
 	return (
 		<div className={style.options}>
 			<div className={style.option}>

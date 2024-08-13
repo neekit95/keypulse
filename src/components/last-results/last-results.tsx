@@ -3,9 +3,16 @@ import style from './last-results.module.scss';
 interface Results {
 	speed: number;
 	accuracy: number
+	id: number;
+	onDelete: (id: number) => void;
 }
 
-const LastResults = (props: Results) => {
+const LastResults: React.FC<Results> = (props) => {
+
+	const handleDelete = () => {
+		props.onDelete(props.id);
+	}
+
 	return (
 		<div className={style.container}>
 			<p>
@@ -14,7 +21,7 @@ const LastResults = (props: Results) => {
 			<p>
 				Точность: {props.accuracy}
 			</p>
-			<button>
+			<button onClick={handleDelete}>
 				X
 			</button>
 		</div>
