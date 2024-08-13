@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import style from './user-page.module.scss'
 import Modal from 'react-modal';
 import LastResults from "../../components/last-results/last-results";
+import {BsFiletypeMdx} from "react-icons/bs";
 
 
 interface User {
@@ -119,30 +120,41 @@ const UserPage = () => {
 
 	// Ф-ция для поиска среднего и лучшего результатов
 	function findMiddleAndBestResult(res: Results[]) {
-		let speeds: number[] = [];
-		let accuracy: number[] = []
+		if (res.length === 0) {
+			return;
+		} else {
+			res.sort((a, b) => b.userSpeed - a.userSpeed);
+			let speeds: number[] = [];
+			let accuracy: number[] = []
 
-		for (const element of res) {
-			speeds.push(element.userSpeed);
-			accuracy.push(element.userAccuracy)
-		}
-		let middleSpeed = +(speeds.reduce((a, b) => a + b, 0) / speeds.length).toFixed(1);
-		let middleAccuracy = +(accuracy.reduce((a, b) => a + b, 0) / accuracy.length).toFixed(1);
+			for (const element of res) {
+				speeds.push(element.userSpeed);
+				accuracy.push(element.userAccuracy)
+			}
+			let middleSpeed = +(speeds.reduce((a, b) => a + b, 0) / speeds.length).toFixed(1);
+			let middleAccuracy = +(accuracy.reduce((a, b) => a + b, 0) / accuracy.length).toFixed(1);
 
-		console.log('middleSpeed', middleSpeed);
-		const middleResult: MiddleResult = {
-			middleUserSpeed: middleSpeed,
-			middleUserAccuracy: middleAccuracy,
-		}
-		setMiddleResult(middleResult);
-		let bestSpeed: number = speeds.sort((a, b) => b - a)[0];
-		let bestAccuracy: number = accuracy.sort((a, b) => b - a)[0];
+			console.log('middleSpeed', middleSpeed);
+			const middleResult: MiddleResult = {
+				middleUserSpeed: middleSpeed,
+				middleUserAccuracy: middleAccuracy,
+			}
+			setMiddleResult(middleResult);
 
-		const bestResults: BestResult = {
-			bestUserSpeed: bestSpeed,
-			bestUserAccuracy: bestAccuracy,
+			let bestSpeed: number = 0;
+			let bestAccuracy: number = 0;
+
+			if (res) {
+				bestSpeed = res[0].userSpeed;
+				bestAccuracy = res[0].userAccuracy;
+			}
+
+			const bestResults: BestResult = {
+				bestUserSpeed: bestSpeed,
+				bestUserAccuracy: bestAccuracy,
+			}
+			setBestResult(bestResults);
 		}
-		setBestResult(bestResults);
 	}
 
 	useEffect(() => {
@@ -226,12 +238,10 @@ const UserPage = () => {
 							<h2>
 								Лучший результат:
 								{
-									middleResult.middleUserSpeed !== 0 ? (
+									middleResult.middleUserSpeed !== 0 && !isNaN(middleResult.middleUserSpeed) ? (
 										<div>
 											<p>Скорость: <span>{bestResult.bestUserSpeed}</span> зн/м</p>
 											<p>Точность: <span>{bestResult.bestUserAccuracy}</span> %</p>
-											{/*<p>Скорость: <span>250</span> зн/м</p>*/}
-											{/*<p>Точность: <span>100</span> %</p>*/}
 										</div>
 									) : <p> - </p>
 								}
@@ -241,7 +251,7 @@ const UserPage = () => {
 							<h2 className={style.h2NotBottom}>
 								Средний результат:
 								{
-									middleResult.middleUserSpeed !== 0 ? (
+									middleResult.middleUserSpeed !== 0 && !isNaN(bestResult.bestUserSpeed) ? (
 										<div>
 											<p>Скорость: <span>{middleResult.middleUserSpeed}</span> зн/м</p>
 											<p>Точность: <span>{middleResult.middleUserAccuracy}</span> %</p>
