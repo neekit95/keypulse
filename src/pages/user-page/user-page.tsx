@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import style from './user-page.module.scss'
 import Modal from 'react-modal';
 import LastResults from "../../components/last-results/last-results";
-import {BsFiletypeMdx} from "react-icons/bs";
 
 
 interface User {
@@ -41,7 +40,7 @@ const UserPage = () => {
 	const [name, setName] = useState<string | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(true);
 	const [isOpenClearModal, setIsOpenClearModal] = useState(false);
-	// const [rang, setRang] = useState('beginner')
+	const [rang, setRang] = useState('beginner')
 	const [middleResult, setMiddleResult] = useState<MiddleResult>({middleUserSpeed: 0, middleUserAccuracy: 0});
 	const [bestResult, setBestResult] = useState<BestResult>({bestUserSpeed: 0, bestUserAccuracy: 0})
 	const [lastResults, setLastResults] = useState<Results[] | undefined>(undefined);
@@ -115,7 +114,10 @@ const UserPage = () => {
 		setIsOpenClearModal(false);
 		setName('');
 		setIsModalOpen(true);
-
+		setLastResults([]);
+		setRang('');
+		setBestResult({bestUserSpeed: 0, bestUserAccuracy: 0});
+		setMiddleResult({middleUserSpeed: 0, middleUserAccuracy: 0});
 	}
 
 	// Ф-ция для поиска среднего и лучшего результатов
@@ -171,10 +173,41 @@ const UserPage = () => {
 	}, [middleResult]);
 
 	useEffect(() => {
-		if (bestResult.bestUserSpeed !== 0) {
+		if (bestResult.bestUserSpeed !== 0 && bestResult) {
 			let res = JSON.stringify(bestResult);
 			localStorage.setItem('bestResult', res);
 		}
+	}, [bestResult]);
+
+	// 	Задаем ранги
+	useEffect(() => {
+		if (
+			bestResult.bestUserSpeed >= 350 &&
+			bestResult.bestUserAccuracy >= 99
+		) {
+			setRang('Platinum')
+		} else if (
+			bestResult.bestUserSpeed < 350 &&
+			bestResult.bestUserSpeed >= 300 &&
+			bestResult.bestUserAccuracy >= 97
+		) {
+			setRang('Gold')
+		} else if (
+			bestResult.bestUserSpeed < 300 &&
+			bestResult.bestUserSpeed >= 250 &&
+			bestResult.bestUserAccuracy >= 95
+		) {
+			setRang('Silver')
+		} else if (
+			bestResult.bestUserSpeed < 250 &&
+			bestResult.bestUserSpeed >= 200 &&
+			bestResult.bestUserAccuracy >= 90
+		) {
+			setRang('Bronse')
+		} else {
+			setRang('Beginner')
+		}
+
 	}, [bestResult]);
 
 	return (
@@ -228,10 +261,9 @@ const UserPage = () => {
 
 							<h2> Ваш ранг:
 								{
-									// user.userRang ? (
-									// 		<span> {user.userRang}</span>
-									<span> Gold </span>
-									// ) : <p> - </p>
+									bestResult.bestUserSpeed !== 0 && !isNaN(bestResult.bestUserSpeed) ? (
+										<span> {rang}</span>
+									) : <p> - </p>
 								}
 							</h2>
 
