@@ -84,8 +84,13 @@ const UserPage = () => {
 
 	useEffect(() => {
 		const results = getAllUserResults();
-		setLastResults(results);
-	}, []);
+
+		if (JSON.stringify(results) !== JSON.stringify(lastResults)) {
+			setLastResults(results);
+		}
+		// setLastResults(results);
+		// }, [lastResults]);
+	}, [lastResults]);
 
 	const handleDeleteResult = (id: number) => {
 		localStorage.removeItem(`userResult_${id}`);
@@ -123,6 +128,8 @@ const UserPage = () => {
 	// Ф-ция для поиска среднего и лучшего результатов
 	function findMiddleAndBestResult(res: Results[]) {
 		if (res.length === 0) {
+			setMiddleResult({middleUserSpeed: 0, middleUserAccuracy: 0});
+			setBestResult({bestUserSpeed: 0, bestUserAccuracy: 0});
 			return;
 		} else {
 			res.sort((a, b) => b.userSpeed - a.userSpeed);
@@ -135,8 +142,7 @@ const UserPage = () => {
 			}
 			let middleSpeed = +(speeds.reduce((a, b) => a + b, 0) / speeds.length).toFixed(1);
 			let middleAccuracy = +(accuracy.reduce((a, b) => a + b, 0) / accuracy.length).toFixed(1);
-
-			console.log('middleSpeed', middleSpeed);
+			
 			const middleResult: MiddleResult = {
 				middleUserSpeed: middleSpeed,
 				middleUserAccuracy: middleAccuracy,
@@ -160,7 +166,7 @@ const UserPage = () => {
 	}
 
 	useEffect(() => {
-		if (lastResults) {
+		if (lastResults && lastResults.length > 0) {
 			findMiddleAndBestResult(lastResults);
 		}
 	}, [lastResults]);
@@ -185,30 +191,26 @@ const UserPage = () => {
 			bestResult.bestUserSpeed >= 350 &&
 			bestResult.bestUserAccuracy >= 99
 		) {
-			setRang('Platinum')
+			setRang('Platinum');
 		} else if (
-			bestResult.bestUserSpeed < 350 &&
 			bestResult.bestUserSpeed >= 300 &&
 			bestResult.bestUserAccuracy >= 97
 		) {
-			setRang('Gold')
+			setRang('Gold');
 		} else if (
-			bestResult.bestUserSpeed < 300 &&
 			bestResult.bestUserSpeed >= 250 &&
 			bestResult.bestUserAccuracy >= 95
 		) {
-			setRang('Silver')
+			setRang('Silver');
 		} else if (
-			bestResult.bestUserSpeed < 250 &&
 			bestResult.bestUserSpeed >= 200 &&
-			bestResult.bestUserAccuracy >= 90
+			bestResult.bestUserAccuracy >= 93
 		) {
-			setRang('Bronse')
+			setRang('Bronze');
 		} else {
-			setRang('Beginner')
+			setRang('Beginner');
 		}
-
-	}, [bestResult]);
+	}, [bestResult.bestUserSpeed, bestResult.bestUserAccuracy]);
 
 	return (
 		<div className={style.container}>
@@ -292,6 +294,7 @@ const UserPage = () => {
 								}
 							</h2>
 						</div>
+
 						<div className={style.lastResults}>
 							<h1> Предыдущие результаты: </h1>
 							{

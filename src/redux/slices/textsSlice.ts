@@ -14,7 +14,7 @@ const texts: string[] = [
 	'Зима близко, и, когда снег покроет землю, мир изменится навсегда. Серые стены Винтерфелла возвышались над нами, защищая нас от ветров и опасностей, но в сердце каждого из нас жила тревога. Время шло, и тени сгущались, предвещая неизбежное.'
 ];
 
-// const texts = ['hello', 'world', 'leto', 'murello', 'massive']
+// const texts = ['Всего понемногу', 'Собака пропала', 'Кто тут главный?', 'Кукуха поехала', 'Массивная дыра']
 
 const getRandomIndex = (): number => Math.floor(Math.random() * texts.length);
 const randomIndex: number = getRandomIndex();
