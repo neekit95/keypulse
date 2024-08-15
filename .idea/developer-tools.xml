@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DeveloperToolsToolWindowSettingsV1" lastSelectedContentNodeId="color-picker">
-    <developerToolsConfigurations />
+  <component name="DeveloperToolsToolWindowSettingsV1" lastSelectedContentNodeId="text-sorting-transformer">
+    <developerToolsConfigurations>
+      <developerToolConfiguration developerToolId="regular-expression-matcher" id="8ada9f9e-02f8-4305-a08d-317196ddce83" name="Workbench">
+        <properties>
+          <property key="inputText" type="INPUT" value="kotlin.String|aurora midsummer midnight earth" />
+          <property key="regexText" type="INPUT" value="kotlin.String|mid(?&lt;postfix&gt;[a-zA-Z]+)" />
+        </properties>
+      </developerToolConfiguration>
+      <developerToolConfiguration developerToolId="text-sorting-transformer" id="0bfce716-6227-47c0-971e-9b4f44cc165d" name="Workbench">
+        <properties>
+          <property key="sourceText" type="INPUT" value="kotlin.String|b&#10;c&#10;a" />
+        </properties>
+      </developerToolConfiguration>
+    </developerToolsConfigurations>
     <expandedGroupNodeIds />
   </component>
 </project>

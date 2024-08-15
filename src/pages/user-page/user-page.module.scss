@@ -1,0 +1,204 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 100vw;
+  min-height: calc(100vh - 60px);
+  height: 100%;
+}
+
+.wrapper {
+  margin-top: 60px;
+  //background-color: #396aab;
+  min-height: calc(100vh - 60px);
+  background-color: white;
+  color: #505050;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+
+}
+
+.modal {
+  background-color: #396aab;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  //padding: 50px;
+  border-radius: 10px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: white;
+  z-index: 20;
+  //height: ;
+  //width: 30vw;
+  //padding: 40px;
+  height: fit-content;
+
+  .buttonSave {
+    //align-self: flex-end;
+    //padding: 5px 10px;
+    width: 100px;
+    //height: 45px;
+    font-size: 16px;
+    //margin-top: 40px;
+  }
+}
+
+.modal input {
+  width: 100%;
+  height: 40px;
+  padding: 5px 10px;
+  overflow: scroll;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.divInput {
+  margin: 15px;
+  gap: 15px;
+  //background-color: red;
+  //height: ;
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  //height: 20px;
+}
+
+.inputAndButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //background-color: teal;
+  gap: 20px;
+
+  input {
+    height: 100%;
+  }
+
+  button {
+    height: 100%;
+  }
+}
+
+.deleteButton {
+  padding: 15px 20px;
+  font-size: 16px;
+  align-self: flex-end;
+  background-color: #396aab;
+  color: white;
+}
+
+.delButtons {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+
+  button {
+    width: 120px;
+
+    &:first-child {
+      background-color: #c46363;
+      color: white;
+    }
+  }
+
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  //max-height: 500px;
+  height: 500px;
+  //background-color: mintcream;
+  gap: 20px;
+}
+
+.profile {
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #efefef;
+  gap: 20px;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+
+  .h2NotBottom {
+    border-bottom: none;
+
+  }
+
+  h2 {
+    display: flex;
+    font-weight: 500;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #396aab;
+
+    p {
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    span {
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Special Elite", system-ui;
+      color: #396aab;
+    }
+  }
+}
+
+.lastResults {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  padding: 20px;
+  flex-direction: column;
+  font-weight: 400;
+  background-color: #efefef;
+  //background-color: red;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+.lastResultsMap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  //height: 100%;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  overflow: scroll;
+}
+
