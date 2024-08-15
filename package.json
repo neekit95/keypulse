@@ -1,8 +1,8 @@
 {
-  "name": "keyboard-simulator",
+  "name": "key-pulse",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://neekit95.github.io/keyboard-simulator",
+  "homepage": "https://neekit95.github.io/keypulse/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.17.0",
