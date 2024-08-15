@@ -12,11 +12,12 @@ Modal.setAppElement('#root');
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement
 );
 root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>
-    </React.StrictMode>
+	<React.StrictMode>
+		{/*<BrowserRouter>*/}
+		<BrowserRouter basename="/keyboard-simulator">
+			<Provider store={store}>
+				<App/>
+			</Provider>
+		</BrowserRouter>
+	</React.StrictMode>
 );

@@ -189,9 +189,15 @@
   //background-color: red;
   border-radius: 10px;
   gap: 20px;
+
+  h1 {
+    padding: 0 10px;
+  }
 }
 
 .lastResultsMap {
+  //background-color: red;
+  padding: 10px 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

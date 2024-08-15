@@ -22,7 +22,7 @@ const LastResults: React.FC<Results> = (props) => {
 				Точность: {props.accuracy}
 			</p>
 			<button onClick={handleDelete}>
-				X
+				delete
 			</button>
 		</div>
 	);
