@@ -5,7 +5,7 @@ import store from "./redux/store";
 import './index.scss';
 import App from "./components/app/app";
 import Modal from "react-modal";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 
 Modal.setAppElement('#root');
 
@@ -14,10 +14,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement
 root.render(
 	<React.StrictMode>
 		{/*<BrowserRouter>*/}
-		<BrowserRouter basename="/keyboard-simulator">
+		<HashRouter>
 			<Provider store={store}>
 				<App/>
 			</Provider>
-		</BrowserRouter>
+		</HashRouter>
 	</React.StrictMode>
 );
