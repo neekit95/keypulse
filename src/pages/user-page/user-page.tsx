@@ -142,7 +142,7 @@ const UserPage = () => {
 			}
 			let middleSpeed = +(speeds.reduce((a, b) => a + b, 0) / speeds.length).toFixed(1);
 			let middleAccuracy = +(accuracy.reduce((a, b) => a + b, 0) / accuracy.length).toFixed(1);
-			
+
 			const middleResult: MiddleResult = {
 				middleUserSpeed: middleSpeed,
 				middleUserAccuracy: middleAccuracy,
@@ -322,7 +322,7 @@ const UserPage = () => {
 						className={style.deleteButton}
 						onClick={() => setIsOpenClearModal(true)}
 					>
-						Удалить данные
+						Удалить профиль
 					</button>
 				</div>)
 			}
