@@ -5,6 +5,9 @@ import {BsKeyboard} from "react-icons/bs";
 import {Link} from 'react-router-dom';
 import {RxHamburgerMenu} from "react-icons/rx";
 import {IoCloseOutline} from "react-icons/io5";
+import {FaBookOpen} from "react-icons/fa";
+import {IoSettingsOutline} from "react-icons/io5";
+
 
 const Header: React.FC = () => {
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -54,15 +57,6 @@ const Header: React.FC = () => {
 
 					{isDropDownOpen && (
 						<div className={style.dropdown}>
-							<Link to='/'>
-								<button onClick={toggleDropDown}>
-									<VscAccount className={`${style.icon} ${style.secondIcon}`}/>
-									<p>
-										Тест печати
-									</p>
-								</button>
-							</Link>
-
 							<Link to='/user'>
 								<button onClick={toggleDropDown}>
 									<VscAccount className={`${style.icon} ${style.secondIcon}`}/>
@@ -72,11 +66,31 @@ const Header: React.FC = () => {
 								</button>
 							</Link>
 
+							<Link to='/'>
+								<button onClick={toggleDropDown}>
+									<BsKeyboard className={`${style.icon} ${style.secondIcon}`}/>
+									<p>
+										Тест печати
+									</p>
+								</button>
+							</Link>
+
+
 							<Link to='/learning'>
 								<button onClick={toggleDropDown}>
-									<VscAccount className={`${style.icon} ${style.secondIcon}`}/>
+									<FaBookOpen className={`${style.icon} ${style.secondIcon}`}/>
 									<p>
 										Обучение
+									</p>
+								</button>
+							</Link>
+
+
+							<Link to='/settings'>
+								<button onClick={toggleDropDown}>
+									<IoSettingsOutline className={`${style.icon} ${style.secondIcon}`}/>
+									<p>
+										Настройки
 									</p>
 								</button>
 							</Link>
