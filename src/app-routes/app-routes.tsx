@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import HomePage from "../pages/home-page/home-page";
 import NotFountPage from "../pages/not-found-page/not-fount-page";
 import UserPage from "../pages/user-page/user-page";
+import LearningPage from "../pages/learning-page/learning-page";
 
 
 const AppRoutes: React.FC = () => {
@@ -10,6 +11,7 @@ const AppRoutes: React.FC = () => {
 		<Routes>
 			<Route path='/' element={<HomePage/>}/>
 			<Route path='/user' element={<UserPage/>}/>
+			<Route path='/learning' element={<LearningPage/>}/>
 			<Route path='*' element={<NotFountPage/>}/>
 		</Routes>
 	);

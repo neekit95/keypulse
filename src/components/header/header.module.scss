@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   letter-spacing: 0.8px;
+  z-index: 10;
 }
 
 .links {
@@ -17,6 +18,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
+
 
   button {
     display: flex;
@@ -30,7 +32,6 @@
     gap: 5px;
     border-radius: 5px;
     overflow: hidden;
-    //background-color: teal;
 
     p {
       font-weight: 400;
@@ -40,25 +41,22 @@
       width: 100%;
       height: 100% !important;
       max-height: 100%;
-      //background-color: red;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .icon {
-      //background-color: teal;
       font-size: 42px;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 2px;
-      //background-color: red;
     }
 
-    .secondIcon {
-      font-size: 30px;
-    }
+    //.secondIcon {
+    //  font-size: 30px;
+    //}
 
     &:hover {
       background-color: #335d98;
@@ -67,8 +65,63 @@
 }
 
 
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border-radius: 0 0 5px 5px;
+  background-color: #396aab;
+  //box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  //gap: 7px;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  flex-direction: column;
+  //background-color: red;
+  padding: 10px;
+
+
+  button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    //min-width: 200px;
+    width: 100%;
+    //background-color: red;
+    //margin: 5px 0;
+    padding: 10px;
+    text-align: left;
+    //background-color: #396aab;
+    border: none;
+    color: white;
+    font-size: 18px;
+
+    p {
+      //background-color: black;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+
+    .secondIcon {
+      font-size: 30px;
+    }
+
+    &:hover {
+      //background-color: #284a7a;
+    }
+  }
+
+}
+
 .wrapper {
-  max-width: 1240px;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +129,9 @@
   width: 100%;
   height: 100%;
   padding: 0 20px;
-  overflow: hidden;
+  //overflow: hidden;
+  //background-color: red;
+  position: relative;
 }
 
 .logo {

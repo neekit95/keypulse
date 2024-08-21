@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #abb7bc;
+  //background-color: #abb7bc;
+  //background-color: #eeeeee;
   width: 100%;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   //margin: auto;
   //margin-top: 30px;
 }
@@ -22,4 +23,15 @@
 }
 
 
-
+.warning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-weight: 100;
+  //font-size: 20px;
+  color: white;
+  background-color: #396aab;
+  text-align: center;
+}

@@ -18,7 +18,7 @@ root {
 }
 
 body, html {
-  background-color: #abb7bc;
+  background-color: #c7c7c7;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -33,6 +33,7 @@ body, html {
   justify-content: center;
   align-items: center;
   max-width: 1200px;
+  padding: 20px;
   //background-color: tan;
   overflow: hidden;
 }

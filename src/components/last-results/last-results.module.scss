@@ -11,7 +11,7 @@
   color: black;
   font-size: 18px;
   transition: all 0.3s ease;
-  z-index: 3;
+  //z-index: 3;
   //background-color: red;
 
   &:hover {
@@ -26,13 +26,28 @@
     height: 100%;
     //text-align: left;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: default;
+    //background-color: teal;
+
+    span {
+      padding: 0 5px;
+      color: #396aab;
+      font-family: "Special Elite", system-ui;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      //background-color: #fff;
+      //line-height: 20px;
+      transform: translateY(7%);
+    }
   }
 
   button {
@@ -50,4 +65,6 @@
     }
   }
 }
+
+
 
