@@ -88,8 +88,6 @@ const UserPage = () => {
 		if (JSON.stringify(results) !== JSON.stringify(lastResults)) {
 			setLastResults(results);
 		}
-		// setLastResults(results);
-		// }, [lastResults]);
 	}, [lastResults]);
 
 	const handleDeleteResult = (id: number) => {
@@ -305,6 +303,7 @@ const UserPage = () => {
 												<LastResults
 													speed={result.userSpeed}
 													accuracy={result.userAccuracy}
+													// rang={result.userRang}
 													id={result.id}
 													key={result.id}
 													onDelete={handleDeleteResult}

@@ -16,13 +16,21 @@ const LastResults: React.FC<Results> = (props) => {
 	return (
 		<div className={style.container}>
 			<p>
-				Скрость: {props.speed}
+				Скрость:
+				<span>
+					{props.speed}
+				</span>
+				Зн/м
 			</p>
 			<p>
-				Точность: {props.accuracy}
+				Точность:
+				<span>
+					{props.accuracy}
+				</span>
+				%
 			</p>
 			<button onClick={handleDelete}>
-				delete
+				Удалить
 			</button>
 		</div>
 	);
