@@ -14,7 +14,6 @@ root {
   flex-direction: column;
   min-width: 100vw;
   min-height: 100vh;
-  //background-color: red;
 }
 
 body, html {
@@ -25,7 +24,6 @@ body, html {
   flex-direction: column;
   min-width: 100vw;
   min-height: 100vh;
-  //background-color: red;
 }
 
 .wrapper {
@@ -34,7 +32,6 @@ body, html {
   align-items: center;
   max-width: 1200px;
   padding: 20px;
-  //background-color: tan;
   overflow: hidden;
 }
 
@@ -76,7 +73,7 @@ a {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  //background-color: teal;
+
   button {
     width: 200px;
     height: 50px;

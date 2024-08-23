@@ -9,21 +9,17 @@
 
 .wrapper {
   margin-top: 60px;
-  //background-color: #396aab;
   min-height: calc(100vh - 60px);
   background-color: white;
   color: #505050;
   width: 100%;
   max-width: 1160px;
-  //height: 100%;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
-
   gap: 20px;
-  //padding: 20px;
 }
 
 .modal {
@@ -35,7 +31,6 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  //padding: 50px;
   border-radius: 10px;
   outline: none;
   display: flex;
@@ -44,18 +39,11 @@
   font-size: 20px;
   color: white;
   z-index: 20;
-  //height: ;
-  //width: 30vw;
-  //padding: 40px;
   height: fit-content;
 
   .buttonSave {
-    //align-self: flex-end;
-    //padding: 5px 10px;
     width: 100px;
-    //height: 45px;
     font-size: 16px;
-    //margin-top: 40px;
   }
 }
 
@@ -71,22 +59,18 @@
 .divInput {
   margin: 15px;
   gap: 15px;
-  //background-color: red;
-  //height: ;
   padding: 10px 0;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  //height: 20px;
 }
 
 .inputAndButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  //background-color: teal;
   gap: 20px;
 
   input {
@@ -129,9 +113,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  //max-height: 500px;
   height: 500px;
-  //background-color: mintcream;
   gap: 20px;
 }
 
@@ -150,7 +132,6 @@
 
   .h2NotBottom {
     border-bottom: none;
-
   }
 
   h2 {
@@ -188,7 +169,6 @@
   flex-direction: column;
   font-weight: 400;
   background-color: #efefef;
-  //background-color: red;
   border-radius: 10px;
   gap: 20px;
 
@@ -198,12 +178,10 @@
 }
 
 .lastResultsMap {
-  //background-color: red;
   padding: 10px 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  //height: 100%;
   width: 100%;
   flex-direction: column;
   gap: 15px;
